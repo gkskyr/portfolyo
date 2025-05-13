@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>yaptiklarim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <body style="background-color: #cdb7ff;"></body>
+
+  <style>
+    /* Sayfa ortalama ve sade stil */
+    body {
+      margin: 0;
+      padding: 0;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
+
+    img {
+      width: 400px; /* resmin boyutu */
+      max-width: 90%;
+      border-radius: 16px;
+     
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    audio {
+      display: none; /* kullanıcı arayüzünü gizleriz */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Görsel -->S
+  <p style=" position:absolute;top: 20px;">Mlsf bu benim ilk projem :p</p>
+  <img src="medya/yaptiklarim/sadhamster.jpg"  
+  alt="sadhamster" 
+   style="width: 400px; position: absolute; top: 85px;">
+  <!-- Müzik (otomatik başlar, sessiz başlar ama kullanıcı tıklarsa sesi açılabilir) -->
+  <button 
+  onclick="document.getElementById('music').play()"
+  style="
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: none;
+    font-size: 55px;
+    background-color: #b596fe;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 60px;
+    
+  "
+>🎻</button>
+<audio id="music" src="/mymusic"></audio>
+
+  
+  <!-- Alt yazı -->
+ 
+
+</body>
+</html>
