@@ -1,0 +1,39 @@
+.butonlar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s;
+    width: 150px;
+    height: 150px;
+}
+
+#buton1 {
+    background-color: #4CAF50;
+    transition: none;
+}
+
+#buton2 {
+    background-color: #2196F3;
+}
+
+#buton3 {
+    background-color: #f44336;
+}
+
+#buton2:hover {
+    background-color: #1976D2;
+}
+
+#buton3:hover {
+    background-color: #d32f2f;
+} 
