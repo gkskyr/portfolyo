@@ -99,6 +99,7 @@ body {
   right: 525px;
   font-size: 18px;
   color: #333;
+  width: 200px;
   transition: transform 0.3s ease;
 }
 
