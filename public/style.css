@@ -16,11 +16,7 @@ body {
   transition: width 0.3s ease, height 0.3s ease; /* Büyüme animasyonu */
 }
 
-/* Hover animasyonunda kapsayıcıyı büyütmek için */
-.face-container.hover-buyuk {
-  width: 1100px;
-  height: 900px;
-}
+
 
 /* Kafa görseli */
 #kafa {
@@ -31,7 +27,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1; /* Gözlerin altında kalacak */
-  transition: transform 0.2s ease; /* Büyüme için yumuşak geçiş */
+
 }
 
 /* Hover ile büyüme efekti */
@@ -82,4 +78,32 @@ body {
 #button1:hover {
   transform: scale(1.1); /* Biraz büyüsün */
   background-color: #b6cbff; /* Renk değişimi */
+}
+.circle-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  position: absolute;
+  right:650px;
+}
+
+.circle-btn:hover {
+  transform: scale(1.2);
+}
+
+.ozellik-metin {
+  position: absolute;
+  right: 525px;
+  font-size: 18px;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.aktif-metin {
+  transform: scale(1.2);
+  color: #000;
+  font-weight: bold;
 }

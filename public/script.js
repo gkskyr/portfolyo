@@ -27,78 +27,8 @@ document.addEventListener('mousemove', (e) => {
   movePupil(rightPupil, eyeCenters.right, e.clientX, e.clientY);
 });
 
-// Göz kırpma animasyonu
-let frame = 1;
-const frameCount = 8;
-let animating = false;
 
-const kirpmaInterval = setInterval(() => {
-  if (animating) return;
-  animating = true;
 
-  const animation = setInterval(() => {
-    kafa.src = `medya/kirpma/kirpma${frame}.png`;
-
-    if (frame === 2) {
-      leftPupil.style.display = "none";
-      rightPupil.style.display = "none";
-    }
-
-    frame++;
-
-    if (frame > frameCount) {
-      clearInterval(animation);
-      kafa.src = "medya/kafa.png";
-      frame = 1;
-      animating = false;
-      leftPupil.style.display = "block";
-      rightPupil.style.display = "block";
-    }
-  }, 83);
-}, 5500);
-
-// Hover animasyonu (button1 için)
-let button1Frame = 1;
-const button1FrameCount = 25;
-let button1Animating = false;
-let button1AnimationInterval;
-
-button1.addEventListener('mouseenter', () => {
-  kafa.style.transform = "translateX(-8px)";
-  if (button1Animating) return;
-
-  clearInterval(kirpmaInterval);
-  animating = false;
-
-  button1Animating = true;
-  button1Frame = 1;
-
-  button1AnimationInterval = setInterval(() => {
-    container.style.width = "846px";
-    container.style.height = "692px";
-    kafa.style.width = "846px";
-    kafa.style.height = "692px";
-    kafa.src = `medya/buton1/${button1Frame}.png`;
-    leftPupil.style.display = "none";
-    rightPupil.style.display = "none";
-    button1Frame++;
-
-    if (button1Frame > button1FrameCount) {
-      clearInterval(button1AnimationInterval);
-      button1Animating = false;
-      kafa.style.transform = "none";
-
-      container.style.width = "500px";
-      container.style.height = "500px";
-      kafa.style.width = "500px";
-      kafa.style.height = "500px";
-
-      kafa.src = "medya/kafa.png";
-      leftPupil.style.display = "block";
-      rightPupil.style.display = "block";
-    }
-  }, 100);
-});
-button1.addEventListener('click', () => {
+ddEventListener('click', () => {
   window.location.href = "ozelliklerim.html";
 });
