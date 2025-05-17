@@ -39,7 +39,9 @@ const kirpmaInterval = setInterval(() => {
   animating = true;
 
   const animation = setInterval(() => {
-    kafa.src = `medya/kirpma/kirpma${frame}.png`;
+    //hata bakalım1
+    console.log("Şu anki kare:", frame);
+    kafa.src = `public/medya/kirpma/kirpma${frame}.png`;
 
     // Göz kırpmanın ikinci karesinde gözler gizleniyor
     if (frame === 2) {
@@ -55,6 +57,8 @@ const kirpmaInterval = setInterval(() => {
       kafa.src = "medya/kafa.png";
       frame = 1;
       animating = false;
+      //hata ayıkla2
+      console.log("Animasyon bitti");
       leftPupil.style.display = "block";
       rightPupil.style.display = "block";
     }
