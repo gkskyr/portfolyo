@@ -41,7 +41,7 @@ const kirpmaInterval = setInterval(() => {
   const animation = setInterval(() => {
     //hata bakalım1
     console.log("Şu anki kare:", frame);
-    kafa.src = `public/medya/kirpma/kirpma${frame}.png`;
+   kafa.src = `medya/kirpma/kirpma${frame}.png?ts=${Date.now()}`;
 
     // Göz kırpmanın ikinci karesinde gözler gizleniyor
     if (frame === 2) {
