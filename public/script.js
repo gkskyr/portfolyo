@@ -7,8 +7,8 @@ const container = document.querySelector('.face-container');
 
 // Gözlerin merkez noktaları — mouse ile hareketin referansı
 const eyeCenters = {
-  left: { x: 710, y: 330 },
-  right: { x: 825, y: 330 }
+  left: { x: 705, y: 325 },
+  right: { x: 815, y: 330 }
 };
 
 // Fare hareket ettikçe göz bebekleri dönsün
