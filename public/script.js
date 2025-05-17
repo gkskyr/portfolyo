@@ -1,49 +1,44 @@
-// DOM'dan göz bebekleri, kafa, buton ve container seçiliyor
 const leftPupil = document.getElementById('leftPupil');
 const rightPupil = document.getElementById('rightPupil');
 const kafa = document.getElementById('kafa');
-const hoverButton = document.getElementById('hoverButton');
+const button1 = document.getElementById('button1');
 const container = document.querySelector('.face-container');
 
-// Gözlerin merkez noktaları — mouse ile hareketin referansı
+// Göz merkezleri
 const eyeCenters = {
-  left: { x: 705, y: 325 },
-  right: { x: 815, y: 330 }
+  left: { x: 700, y: 320 },
+  right: { x: 805, y: 320 }
 };
 
-// Fare hareket ettikçe göz bebekleri dönsün
+// Gözleri fareye doğru oynatma
+function movePupil(pupil, center, mouseX, mouseY) {
+  const dx = mouseX - center.x;
+  const dy = mouseY - center.y;
+  const dist = Math.min(Math.sqrt(dx * dx + dy * dy), 12);
+  const angle = Math.atan2(dy, dx);
+  const x = Math.cos(angle) * dist;
+  const y = Math.sin(angle) * dist;
+  pupil.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// Gözleri takip ettir
 document.addEventListener('mousemove', (e) => {
   movePupil(leftPupil, eyeCenters.left, e.clientX, e.clientY);
   movePupil(rightPupil, eyeCenters.right, e.clientX, e.clientY);
 });
 
-// Göz bebeği nasıl hareket eder onu hesaplayan fonksiyon
-function movePupil(pupil, center, mouseX, mouseY) {
-  const dx = mouseX - center.x; // yatay fark
-  const dy = mouseY - center.y; // dikey fark
-  const dist = Math.min(Math.sqrt(dx * dx + dy * dy), 12); // maksimum mesafe 12px
-  const angle = Math.atan2(dy, dx); // açıyı bul
-  const x = Math.cos(angle) * dist;
-  const y = Math.sin(angle) * dist;
-  pupil.style.transform = `translate(${x}px, ${y}px)`; // CSS ile oynatma
-}
-
-// Göz kırpma animasyonu için değişkenler
+// Göz kırpma animasyonu
 let frame = 1;
 const frameCount = 8;
 let animating = false;
 
-// Belirli aralıklarla göz kırpma başlasın
 const kirpmaInterval = setInterval(() => {
   if (animating) return;
   animating = true;
 
   const animation = setInterval(() => {
-    //hata bakalım1
-    console.log("Şu anki kare:", frame);
-   kafa.src = `medya/kirpma/kirpma${frame}.png?ts=${Date.now()}`;
+    kafa.src = `medya/kirpma/kirpma${frame}.png`;
 
-    // Göz kırpmanın ikinci karesinde gözler gizleniyor
     if (frame === 2) {
       leftPupil.style.display = "none";
       rightPupil.style.display = "none";
@@ -51,61 +46,59 @@ const kirpmaInterval = setInterval(() => {
 
     frame++;
 
-    // Animasyon bittiğinde eski haline dön
     if (frame > frameCount) {
       clearInterval(animation);
       kafa.src = "medya/kafa.png";
       frame = 1;
       animating = false;
-      //hata ayıkla2
-      console.log("Animasyon bitti");
       leftPupil.style.display = "block";
       rightPupil.style.display = "block";
     }
-  }, 83); // 12 fps hızında (1000/12 ≈ 83ms)
-}, 5500); // Her 5.5 saniyede bir kırpma
+  }, 83);
+}, 5500);
 
-// Hover animasyonu için değişkenler
-/*let hoverFrame = 1;
-const hoverFrameCount = 19;
-let hoverAnimating = false;
-let hoverAnimationInterval;
+// Hover animasyonu (button1 için)
+let button1Frame = 1;
+const button1FrameCount = 25;
+let button1Animating = false;
+let button1AnimationInterval;
 
-// Butonun üzerine gelinince animasyon başlasın
-hoverButton.addEventListener('mouseenter', () => {
-  if (hoverAnimating) return; // Zaten oynuyorsa tekrar başlama
+button1.addEventListener('mouseenter', () => {
+  kafa.style.transform = "translateX(-8px)";
+  if (button1Animating) return;
 
-  clearInterval(kirpmaInterval); // Göz kırpmayı durdur
+  clearInterval(kirpmaInterval);
   animating = false;
 
-  hoverAnimating = true;
-  hoverFrame = 1;
+  button1Animating = true;
+  button1Frame = 1;
 
-  // Göz bebeklerini gizle
-  leftPupil.style.display = "none";
-  rightPupil.style.display = "none";
+  button1AnimationInterval = setInterval(() => {
+    container.style.width = "846px";
+    container.style.height = "692px";
+    kafa.style.width = "846px";
+    kafa.style.height = "692px";
+    kafa.src = `medya/buton1/${button1Frame}.png`;
+    leftPupil.style.display = "none";
+    rightPupil.style.display = "none";
+    button1Frame++;
 
-  // Kafa ve container büyüsün (class ekleniyor)
-  kafa.classList.add("hover-scale");
-  container.classList.add("hover-buyuk");
+    if (button1Frame > button1FrameCount) {
+      clearInterval(button1AnimationInterval);
+      button1Animating = false;
+      kafa.style.transform = "none";
 
-  // Hover animasyon karelerini sırayla göster
-  hoverAnimationInterval = setInterval(() => {
-    kafa.src = `medya/buton1/${hoverFrame}.png`;
-    hoverFrame++;
+      container.style.width = "500px";
+      container.style.height = "500px";
+      kafa.style.width = "500px";
+      kafa.style.height = "500px";
 
-    if (hoverFrame > hoverFrameCount) {
-      clearInterval(hoverAnimationInterval);
-      hoverAnimating = false;
-
-      // Ana kafaya geri dön
       kafa.src = "medya/kafa.png";
-      kafa.classList.remove("hover-scale");
-      container.classList.remove("hover-buyuk");
-
-      // Gözleri tekrar göster
       leftPupil.style.display = "block";
       rightPupil.style.display = "block";
     }
-  }, 83); // Yine saniyede 12 kare
-}); */
+  }, 100);
+});
+button1.addEventListener('click', () => {
+  window.location.href = "ozelliklerim.html";
+});

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Özelliklerim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: Arial, sans-serif;
+      background-color: #fefefe;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Benim Özelliklerim</h1>
+  <ul>
+    <li>Kararlıyım (Hover animasyonunu bırakmadım 😤)</li>
+    <li>Detaycıyım (1 px bile kaçıramam 👁️)</li>
+    <li>Tasarımcıyım (Kafayı sola kaydırmam tesadüf değil 🧠)</li>
+    <li>Sabırlıyım (Gerçekten çok sabırlıyım...)</li>
+  </ul>
+</body>
+</html>

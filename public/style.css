@@ -63,7 +63,7 @@ body {
 }
 
 /* Özelliklerim butonu stili */
-#hoverButton {
+#button1{
   position: absolute;
   bottom: 30px;
   left: 20px;
@@ -79,7 +79,7 @@ body {
 }
 
 /* Buton hover efekti */
-#hoverButton:hover {
+#button1:hover {
   transform: scale(1.1); /* Biraz büyüsün */
   background-color: #b6cbff; /* Renk değişimi */
 }
