@@ -16,8 +16,6 @@ body {
   transition: width 0.3s ease, height 0.3s ease; /* Büyüme animasyonu */
 }
 
-
-
 /* Kafa görseli */
 #kafa {
   width: 100%; /* Konteynıra tamamen otursun */
@@ -27,7 +25,6 @@ body {
   top: 0;
   left: 0;
   z-index: 1; /* Gözlerin altında kalacak */
-
 }
 
 /* Hover ile büyüme efekti */
@@ -79,32 +76,47 @@ body {
   transform: scale(1.1); /* Biraz büyüsün */
   background-color: #b6cbff; /* Renk değişimi */
 }
-.circle-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s ease;
-  position: absolute;
-  right:650px;
+
+/* Button container styles */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 20px;
 }
 
-.circle-btn:hover {
-  transform: scale(1.2);
+/* Common styles for all round buttons */
+.round-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.ozellik-metin {
-  position: absolute;
-  right: 525px;
-  font-size: 18px;
-  color: #333;
-  width: 200px;
-  transition: transform 0.3s ease;
+.round-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.aktif-metin {
-  transform: scale(1.2);
-  color: #000;
-  font-weight: bold;
-}
+/* Individual button colors */
+#buton1 { background-color: #FF6B6B; }
+#buton2 { background-color: #4ECDC4; }
+#buton3 { background-color: #45B7D1; }
+#buton4 { background-color: #96CEB4; }
+#buton5 { background-color: #FFEEAD; }
+#buton6 { background-color: #D4A5A5; }
+#buton7 { background-color: #9B9B9B; }
+
+/* Button hover effects */
+#buton1:hover { background-color: #FF5252; }
+#buton2:hover { background-color: #45B7A0; }
+#buton3:hover { background-color: #3CA0B9; }
+#buton4:hover { background-color: #85BCA3; }
+#buton5:hover { background-color: #FFE494; }
+#buton6:hover { background-color: #C49292; }
+#buton7:hover { background-color: #8A8A8A; }

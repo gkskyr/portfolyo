@@ -9,47 +9,19 @@
   <!-- 6. Stil dosyasını bağla (zorunlu değil ama gerekli) -->
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
-
-
 </head>
 <body>
-  <div id="renkKutusu"></div>
-  <div style="position: relative; height: 800px;">
-    <button class="circle-btn"  onclick="metniBuyut(1); renkDegistir(1);videoGoster(1);" style="background-color: #ff1100; top: 90px;"></button>
-    <span class="ozellik-metin" id="metin1" style="top: 90px;">Meraklıyımdır</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(2); renkDegistir(2);videoGoster(2);" style="background-color: #ff8f00; top: 190px;"></button>
-    <span class="ozellik-metin" id="metin2" style="top: 165px;">Öğrenmekten keyif alırım</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(3); renkDegistir(3);videoGoster(3);" style="background-color: #ffec00; top: 290px;"></button>
-    <span class="ozellik-metin" id="metin3" style="top: 290px;">Pozitifimdir</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(4); renkDegistir(4);videoGoster(4);" style="background-color: #00ff04; top: 390px;"></button>
-    <span class="ozellik-metin" id="metin4" style="top: 380px;">Çok yönlüyümdür</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(5); renkDegistir(5);videoGoster(5);" style="background-color: #00ffe8; top: 490px;"></button>
-    <span class="ozellik-metin" id="metin5" style="top: 490px;">Mükemmeliyetçiyimdir</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(6); renkDegistir(6);videoGoster(6);" style="background-color: #006dff; top: 590px;"></button>
-    <span class="ozellik-metin" id="metin6" style="top: 590px;">Çözüm odaklıyımdır</span>
-  
-    <button class="circle-btn"  onclick="metniBuyut(7); renkDegistir(7);videoGoster(7);" style="background-color: #8f00ff; top: 690px;"></button>
-    <span class="ozellik-metin" id="metin7" style="top: 690px;">Yaratıcıyımdır</span>
+  <div class="button-container">
+    <button class="round-button" id="buton1">Buton 1</button>
+    <button class="round-button" id="buton2">Buton 2</button>
+    <button class="round-button" id="buton3">Buton 3</button>
+    <button class="round-button" id="buton4">Buton 4</button>
+    <button class="round-button" id="buton5">Buton 5</button>
+    <button class="round-button" id="buton6">Buton 6</button>
+    <button class="round-button" id="buton7">Buton 7</button>
   </div>
-  <div id="videoKutusu">
-    <video id="video1" src="medya/ozellikler/1.mp4" class="ozellik-video" muted></video>
-    <video id="video2" src="medya/ozellikler/2.mp4" class="ozellik-video" muted></video>
-    <video id="video3" src="medya/ozellikler/3.mp4" class="ozellik-video" muted></video>
-    <video id="video4" src="medya/ozellikler/4.mp4" class="ozellik-video" muted></video>
-    <video id="video5" src="medya/ozellikler/5.mp4" class="ozellik-video" muted></video>
-    <video id="video6" src="medya/ozellikler/6.mp4" class="ozellik-video" muted></video>
-    <video id="video7" src="medya/ozellikler/7.mp4" class="ozellik-video" muted></video><!-- 4–7 aynı şekilde devam -->
-  </div>
-  
-  
 
   <!-- 8. JavaScript dosyası (zorunlu değil ama etkileşim için şart) -->
   <script src="script.js"></script>
-
 </body>
 </html>
