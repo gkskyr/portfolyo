@@ -66,7 +66,7 @@ const kirpmaInterval = setInterval(() => {
 }, 5500); // Her 5.5 saniyede bir kırpma
 
 // Hover animasyonu için değişkenler
-let hoverFrame = 1;
+/*let hoverFrame = 1;
 const hoverFrameCount = 19;
 let hoverAnimating = false;
 let hoverAnimationInterval;
@@ -108,4 +108,4 @@ hoverButton.addEventListener('mouseenter', () => {
       rightPupil.style.display = "block";
     }
   }, 83); // Yine saniyede 12 kare
-});
+}); */
