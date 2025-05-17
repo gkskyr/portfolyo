@@ -1,116 +1,101 @@
-/* Sayfa genel ayarları - Temel sayfa düzeni için gerekli stiller */
+/* Sayfa genel ayarları */
 body {
-  margin: 0;                    /* Sayfanın dış boşluklarını kaldır */
-  background-color: #f0f0f0;    /* Sayfa arka plan rengini açık gri yap */
-  display: flex;                /* Flexbox düzenini etkinleştir */
-  justify-content: center;      /* İçeriği yatayda ortala */
-  align-items: center;          /* İçeriği dikeyde ortala */
-  height: 100vh;                /* Tam ekran yüksekliği kullan */
+  margin: 0; /* Kenarlıkları sıfırla */
+  background-color: #f0f0f0; /* Arka plan rengi */
+  display: flex; /* Ortalamak için flex kullan */
+  justify-content: center; /* Yatay ortalama */
+  align-items: center; /* Dikey ortalama */
+  height: 100vh; /* Sayfa yüksekliği kadar alan kapla */
+  font-family: 'Nunito', sans-serif;
 }
 
-/* Yüz animasyonu için ana konteyner ayarları */
+/* Kafanın ve gözlerin kapsayıcısı */
 .face-container {
-  width: 550px;                 /* Konteyner genişliği */
-  height: 550px;                /* Konteyner yüksekliği */
-  position: relative;           /* İç elemanlar için referans noktası */
-  transition: width 0.3s ease, height 0.3s ease;  /* Boyut değişimlerini animasyonlu yap */
+  width: 550px; /* Başlangıç genişliği */
+  height: 550px; /* Başlangıç yüksekliği */
+  position: relative; /* İçerideki öğelere konumlandırma için */
+  transition: width 0.3s ease, height 0.3s ease; /* Büyüme animasyonu */
 }
 
-/* Ana kafa görseli için stil ayarları */
+/* Kafa görseli */
 #kafa {
-  width: 100%;                  /* Konteynerin tüm genişliğini kapla */
-  height: 100%;                 /* Konteynerin tüm yüksekliğini kapla */
-  object-fit: contain;          /* Görsel oranını koru */
-  position: absolute;           /* Mutlak konumlandırma */
-  top: 0;                       /* Üstten sıfır piksel */
-  left: 0;                      /* Soldan sıfır piksel */
-  z-index: 1;                   /* Katman sırası - gözlerin altında */
+  width: 100%; /* Konteynıra tamamen otursun */
+  height: 100%;
+  object-fit: contain; /* Oran korunsun */
+  position: absolute; /* Gözlerle üst üste gelsin */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Gözlerin altında kalacak */
 }
 
-/* Fare üzerine gelince kafa büyütme efekti */
+/* Hover ile büyüme efekti */
 #kafa.hover-scale {
-  transform: scale(1.3);        /* %30 büyüt */
-  transform-origin: center center;  /* Büyütme merkezi orta nokta */
+  transform: scale(1.3); /* %130 büyütme */
+  transform-origin: center center; /* Ortasından büyüsün */
 }
 
-/* Göz bebekleri için ortak özellikler */
+/* Göz bebekleri için ortak stil */
 .pupil {
-  position: absolute;           /* Mutlak konumlandırma */
-  width: 50px;                  /* Göz bebeği genişliği */
-  height: 50px;                 /* Göz bebeği yüksekliği */
-  pointer-events: none;         /* Fare etkileşimlerini devre dışı bırak */
-  display: block;               /* Blok element olarak göster */
-  z-index: 2;                   /* Katman sırası - kafanın üstünde */
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none; /* Fareyle etkileşime girmez */
+  display: block;
+  z-index: 2; /* Kafanın üstünde dursun */
 }
 
-/* Sol göz bebeği konumlandırma */
+/* Sol göz bebeği konumu */
 .pupil.left {
-  top: 193px;                   /* Üstten mesafe */
-  left: 192px;                  /* Soldan mesafe */
+  top: 193px;
+  left: 192px;
 }
 
-/* Sağ göz bebeği konumlandırma */
+/* Sağ göz bebeği konumu */
 .pupil.right {
-  top: 193px;                   /* Üstten mesafe */
-  left: 300px;                  /* Soldan mesafe */
+  top: 193px;
+  left: 300px;
 }
 
-/* Ana menü butonu stilleri */
-#button1 {
-  position: absolute;           /* Mutlak konumlandırma */
-  bottom: 30px;                /* Alttan mesafe */
-  left: 20px;                  /* Soldan mesafe */
-  font-size: 26px;             /* Yazı boyutu */
-  padding: 18px 40px;          /* İç boşluk - üst/alt ve sağ/sol */
-  background-color: #cddfff;    /* Arka plan rengi */
-  color: #222c54;              /* Yazı rengi */
-  border: none;                /* Kenarlık yok */
-  border-radius: 50px;         /* Oval köşeler */
-  cursor: pointer;             /* Fare imleci el işareti */
-  transition: all 0.3s ease;   /* Tüm değişimleri animasyonlu yap */
-  z-index: 5;                  /* En üstte göster */
+/* Özelliklerim butonu stili */
+#button1{
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  font-size: 26px;
+  padding: 18px 40px;
+  background-color: #cddfff;
+  color: #222c54;
+  border: none;
+  border-radius: 50px; /* Oval yapı */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5; /* Her şeyin üstünde */
 }
 
-/* Ana menü butonu hover efekti */
+/* Buton hover efekti */
 #button1:hover {
-  transform: scale(1.1);        /* Fare üzerine gelince %10 büyüt */
-  background-color: #b6cbff;    /* Arka plan rengini koyulaştır */
+  transform: scale(1.1); /* Biraz büyüsün */
+  background-color: #b6cbff; /* Renk değişimi */
 }
 
-/* Yuvarlak butonlar için konteyner stili */
-.button-container {
-  display: flex;                /* Flexbox düzeni */
-  flex-direction: column;       /* Dikey hizalama */
-  gap: 100px;                    /* Butonlar arası boşluk */
+.circle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
   position: absolute;
   right:650px;
-  padding: 20px;                /* Dış boşluk */
+  transition: transform 0.2s;
 }
-
-/* Tüm yuvarlak butonlar için ortak stiller */
-.round-button {
-  width: 30px;                 /* Buton genişliği */
-  height: 30px;                /* Buton yüksekliği */
-  border-radius: 50%;           /* Tam yuvarlak şekil */
-  border: none;                 /* Kenarlık yok */
-  cursor: pointer;              /* Fare imleci el işareti */
+.circle-btn:hover {
+  transform: scale(1.1); /* hover büyüme efekti */
+}
+.buton-metin {
   position: absolute;
-  right:650px;
-  transition: transform 0.2s, box-shadow 0.2s;  /* Hover efektleri için geçiş */
+  width: 200px;
+  right: 400px;
+  padding: 8px 12px;
+  border-radius: 10px;
+ font-weight: bold;
 }
-
-/* Yuvarlak butonların hover efekti */
-.round-button:hover {
-  transform: scale(1.05);       /* Hafif büyüme efekti */
-}
-
-/* Her bir buton için özel renkler */
-#buton1 { background-color: #ff1100; }  /* Kırmızımsı ton */
-#buton2 { background-color: #ff8f00; }  /* Turkuaz */
-#buton3 { background-color: #ffec00; }  /* Açık mavi */
-#buton4 { background-color: #00ff04; }  /* Açık yeşil */
-#buton5 { background-color: #00ffe8; }  /* Açık sarı */
-#buton6 { background-color: #006dff; }  /* Açık pembe */
-#buton7 { background-color: #8f00ff; }  /* Gri */
-
-

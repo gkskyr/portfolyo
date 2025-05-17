@@ -26,9 +26,8 @@ document.addEventListener('mousemove', (e) => {
   movePupil(leftPupil, eyeCenters.left, e.clientX, e.clientY);
   movePupil(rightPupil, eyeCenters.right, e.clientX, e.clientY);
 });
-
-
-
 addEventListener('click', () => {
   window.location.href = "ozelliklerim.html";
 });
+
+
