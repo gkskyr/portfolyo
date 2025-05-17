@@ -32,3 +32,11 @@ document.addEventListener('mousemove', (e) => {
 addEventListener('click', () => {
   window.location.href = "ozelliklerim.html";
 });
+function metniBuyut(index) {
+  // Önce tüm metinlerden aktifliği kaldır
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById(`metin${i}`).classList.remove("aktif-metin");
+  }
+  // Sonra tıklanan metni aktif hale getir
+  document.getElementById(`metin${index}`).classList.add("aktif-metin");
+}
