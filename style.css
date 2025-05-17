@@ -1,117 +1,85 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Sayfa genel ayarları */
 body {
-    background-color: #1a1a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
+  margin: 0; /* Kenarlıkları sıfırla */
+  background-color: #f0f0f0; /* Arka plan rengi */
+  display: flex; /* Ortalamak için flex kullan */
+  justify-content: center; /* Yatay ortalama */
+  align-items: center; /* Dikey ortalama */
+  height: 100vh; /* Sayfa yüksekliği kadar alan kapla */
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
+/* Kafanın ve gözlerin kapsayıcısı */
 .face-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
+  width: 550px; /* Başlangıç genişliği */
+  height: 550px; /* Başlangıç yüksekliği */
+  position: relative; /* İçerideki öğelere konumlandırma için */
+  transition: width 0.3s ease, height 0.3s ease; /* Büyüme animasyonu */
 }
 
-.kafa {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+/* Hover animasyonunda kapsayıcıyı büyütmek için */
+.face-container.hover-buyuk {
+  width: 1100px;
+  height: 900px;
 }
 
-.goz {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Kafa görseli */
+#kafa {
+  width: 100%; /* Konteynıra tamamen otursun */
+  height: 100%;
+  object-fit: contain; /* Oran korunsun */
+  position: absolute; /* Gözlerle üst üste gelsin */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Gözlerin altında kalacak */
+  transition: transform 0.2s ease; /* Büyüme için yumuşak geçiş */
 }
 
-.sol-goz {
-    left: 35%;
-    top: 45%;
+/* Hover ile büyüme efekti */
+#kafa.hover-scale {
+  transform: scale(1.3); /* %130 büyütme */
+  transform-origin: center center; /* Ortasından büyüsün */
 }
 
-.sag-goz {
-    right: 35%;
-    top: 45%;
+/* Göz bebekleri için ortak stil */
+.pupil {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none; /* Fareyle etkileşime girmez */
+  display: block;
+  z-index: 2; /* Kafanın üstünde dursun */
 }
 
-.goz-bebegi {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.1s ease;
+/* Sol göz bebeği konumu */
+.pupil.left {
+  top: 193px;
+  left: 192px;
 }
 
-.buttons-container {
-    display: flex;
-    gap: 2rem;
+/* Sağ göz bebeği konumu */
+.pupil.right {
+  top: 193px;
+  left: 300px;
 }
 
-.buton {
-    width: 150px;
-    height: 150px;
-    cursor: pointer;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.2s ease;
+/* Özelliklerim butonu stili */
+#hoverButton {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  font-size: 26px;
+  padding: 18px 40px;
+  background-color: #cddfff;
+  color: #222c54;
+  border: none;
+  border-radius: 50px; /* Oval yapı */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5; /* Her şeyin üstünde */
 }
 
-.buton:hover {
-    transform: scale(1.1);
+/* Buton hover efekti */
+#hoverButton:hover {
+  transform: scale(1.1); /* Biraz büyüsün */
+  background-color: #b6cbff; /* Renk değişimi */
 }
-
-.butonlar {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    transition: background-color 0.3s;
-    width: 150px;
-    height: 150px;
-}
-
-#buton1 {
-    background-color: #4CAF50;
-    transition: none;
-}
-
-#buton2 {
-    background-color: #2196F3;
-}
-
-#buton3 {
-    background-color: #f44336;
-}
-
-#buton2:hover {
-    background-color: #1976D2;
-}
-
-#buton3:hover {
-    background-color: #d32f2f;
-} 

@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html> <!-- HTML5 belgesi olduğunu belirtiyoruz -->
+<html lang="tr"> <!-- Sayfa dili Türkçe -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Göksu Kayar</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"> <!-- Türkçe karakterler için -->
+  <title>Fareyi Takip Eden Gözler</title> <!-- Sekmede görünen başlık -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil uyumluluk -->
+
+  <!-- Harici stil dosyasını bağlıyoruz -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JavaScript dosyasını defer ile en son çalıştır diyoruz -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="face-container">
-            <img src="medya/kafa.png" alt="Kafa" class="kafa">
-            <div class="goz sol-goz">
-                <img src="medya/pupil.png" alt="Göz bebeği" class="goz-bebegi">
-            </div>
-            <div class="goz sag-goz">
-                <img src="medya/pupil.png" alt="Göz bebeği" class="goz-bebegi">
-            </div>
-        </div>
-        <div class="buttons-container">
-            <div id="buton1" class="buton"></div>
-            <div id="buton2" class="buton"></div>
-            <div id="buton3" class="buton"></div>
-        </div>
-    </div>
-    <script src="script.js"></script>
+  <!-- Gözler ve kafanın yer aldığı kapsayıcı -->
+  <div class="face-container">
+    <!-- Sabit kafa görseli -->
+    <img id="kafa" src="medya/kafa.png" alt="kafa">
+
+    <!-- Göz bebekleri -->
+    <img id="leftPupil" src="medya/pupil.png" class="pupil left" alt="sol göz">
+    <img id="rightPupil" src="medya/pupil.png" class="pupil right" alt="sağ göz">
+  </div>
+
+  <!-- Özelliklerim butonu -->
+  <button id="hoverButton">Özelliklerim</button>
 </body>
-</html> 
+</html>
