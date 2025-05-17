@@ -29,6 +29,6 @@ document.addEventListener('mousemove', (e) => {
 
 
 
-ddEventListener('click', () => {
+addEventListener('click', () => {
   window.location.href = "ozelliklerim.html";
 });
