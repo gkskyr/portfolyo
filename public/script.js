@@ -45,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const button3 = document.getElementById('button3');
+  if (button3) {
+    button3.addEventListener('click', () => {
+      window.location.href = "banaulas.html";
+    });
+  }
+
   const butonlar = document.querySelectorAll('.yuvarlak-buton');
   const hoverVideoKutusu = document.getElementById('hoverVideoKutusu');
   const hoverVideo = document.getElementById('hoverVideo');

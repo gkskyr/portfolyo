@@ -1,29 +1,50 @@
-<!DOCTYPE html> <!-- HTML5 belgesi olduğunu belirtiyoruz -->
-<html lang="tr"> <!-- Sayfa dili Türkçe -->
+<!-- Belgenin HTML5 standardında olduğunu belirtir -->
+<!DOCTYPE html>
+
+<!-- HTML başlangıcı ve sayfa dilinin Türkçe olduğunu belirtir -->
+<html lang="tr">
+
+<!-- Head bölümü başlangıcı - Sayfa meta bilgileri ve bağlantıları burada yer alır -->
 <head>
-  <meta charset="UTF-8"> <!-- Türkçe karakterler için -->
-  <title>Fareyi Takip Eden Gözler</title> <!-- Sekmede görünen başlık -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil uyumluluk -->
+    <!-- Türkçe karakterler dahil tüm karakterlerin doğru görüntülenmesi için karakter seti tanımı -->
+    <meta charset="UTF-8">
 
-  <!-- Harici stil dosyasını bağlıyoruz -->
-  <link rel="stylesheet" href="style.css">
+    <!-- Tarayıcı sekmesinde görünecek başlık -->
+    <title>Fareyi Takip Eden Gözler</title>
 
-  <!-- JavaScript dosyasını defer ile en son çalıştır diyoruz -->
-  <script src="script.js" defer></script>
+    <!-- Mobil cihazlarda doğru ölçekleme için viewport ayarı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sayfa stillerinin bulunduğu CSS dosyasının bağlantısı -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript dosyası bağlantısı - defer ile sayfa yüklendikten sonra çalışır -->
+    <script src="script.js" defer></script>
 </head>
+
+<!-- Body bölümü başlangıcı - Sayfanın görünen içeriği burada yer alır -->
 <body>
-  <!-- Gözler ve kafanın yer aldığı kapsayıcı -->
-  <div class="face-container">
-    <!-- Sabit kafa görseli -->
-    <img id="kafa" src="medya/kafa.png" alt="kafa">
+    <!-- Yüz animasyonu için ana kapsayıcı div -->
+    <div class="face-container">
+        <!-- Ana kafa görseli -->
+        <img id="kafa" src="medya/kafa.png" alt="kafa">
 
-    <!-- Göz bebekleri -->
-    <img id="leftPupil" src="medya/pupil.png" class="pupil left" alt="sol göz">
-    <img id="rightPupil" src="medya/pupil.png" class="pupil right" alt="sağ göz">
-  </div>
+        <!-- Sol göz bebeği görseli -->
+        <img id="leftPupil" src="medya/pupil.png" class="pupil left" alt="sol göz">
 
-  <!-- Özelliklerim butonu -->
-  <button id="button1">Özelliklerim</button>
-  <button id="button2">Projelerim</button>
+        <!-- Sağ göz bebeği görseli -->
+        <img id="rightPupil" src="medya/pupil.png" class="pupil right" alt="sağ göz">
+    </div>
+
+    <!-- Özelliklerim sayfasına yönlendiren buton -->
+    <button id="button1">Özelliklerim</button>
+
+    <!-- Projelerim sayfasına yönlendiren buton -->
+    <button id="button2">Projelerim</button>
+
+    <!-- İletişim sayfasına yönlendiren buton -->
+    <button id="button3">İletişim</button>
 </body>
+
+<!-- HTML belgesinin sonu -->
 </html>

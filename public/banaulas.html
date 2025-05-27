@@ -1,0 +1,218 @@
+<!-- HTML5 belge tipini tanımlar -->
+<!DOCTYPE html>
+
+<!-- HTML başlangıcı ve Türkçe dil ayarı -->
+<html lang="tr">
+
+<!-- Sayfa başlık ve meta bilgilerinin bulunduğu bölüm başlangıcı -->
+<head>
+    <!-- Türkçe karakter desteği için UTF-8 karakter seti -->
+    <meta charset="UTF-8">
+
+    <!-- Mobil cihazlar için görünüm ayarı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sayfa başlığı -->
+    <title>Bana Ulaş</title>
+
+    <!-- Sayfa içi CSS stilleri başlangıcı -->
+    <style>
+        /* Ana sayfa yapısı için temel stiller */
+        body {
+            margin: 0;                    /* Dış boşlukları sıfırla */
+            height: 100vh;                /* Tam ekran yüksekliği */
+            display: flex;                /* Esnek kutu düzeni */
+            flex-direction: column;       /* Dikey hizalama */
+            align-items: center;          /* Yatayda ortalama */
+            background-color: #b89fdb;    /* Mor arka plan */
+            font-family: Arial, sans-serif; /* Yazı tipi */
+            padding: 20px;                /* İç boşluk */
+        }
+
+        /* Form konteyneri için stiller */
+        .contact-container {
+            background-color: #fff;       /* Beyaz arka plan */
+            padding: 30px;                /* İç boşluk */
+            border-radius: 15px;          /* Köşe yuvarlaklığı */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+            width: 100%;                  /* Tam genişlik */
+            max-width: 500px;             /* Maksimum genişlik */
+            margin-top: 40px;             /* Üst boşluk */
+        }
+
+        /* Başlık stili */
+        h1 {
+            color: #222c54;               /* Koyu mavi yazı rengi */
+            font-size: 32px;              /* Yazı boyutu */
+            font-weight: 300;             /* İnce yazı kalınlığı */
+            text-align: center;           /* Ortala */
+            margin-bottom: 30px;          /* Alt boşluk */
+            letter-spacing: 1.5px;        /* Harf aralığı */
+        }
+
+        /* Form grup elemanları için stil */
+        .form-group {
+            margin-bottom: 20px;          /* Alt boşluk */
+        }
+
+        /* Form etiketleri için stil */
+        label {
+            display: block;               /* Blok element */
+            margin-bottom: 8px;           /* Alt boşluk */
+            color: #222c54;              /* Koyu mavi yazı rengi */
+            font-size: 16px;             /* Yazı boyutu */
+        }
+
+        /* Giriş alanları ortak stili */
+        input, textarea {
+            width: 100%;                 /* Tam genişlik */
+            padding: 12px;               /* İç boşluk */
+            border: 2px solid #d6b0fa;   /* Mor kenarlık */
+            border-radius: 8px;          /* Köşe yuvarlaklığı */
+            font-size: 16px;             /* Yazı boyutu */
+            transition: border-color 0.3s ease; /* Geçiş efekti */
+            box-sizing: border-box;      /* Kutu modeli */
+        }
+
+        /* Giriş alanları odaklanma durumu */
+        input:focus, textarea:focus {
+            outline: none;               /* Varsayılan çerçeveyi kaldır */
+            border-color: #eab6ff;      /* Odaklanma rengi */
+        }
+
+        /* Mesaj alanı özel stili */
+        textarea {
+            height: 150px;              /* Yükseklik */
+            resize: vertical;           /* Dikey boyutlandırma */
+        }
+
+        /* Buton temel stili */
+        button {
+            background-color: #d6b0fa;  /* Mor arka plan */
+            color: #222c54;            /* Koyu mavi yazı */
+            border: none;              /* Kenarlık yok */
+            padding: 12px 30px;        /* İç boşluk */
+            border-radius: 25px;       /* Yuvarlak köşeler */
+            font-size: 16px;           /* Yazı boyutu */
+            cursor: pointer;           /* El işaretçisi */
+            transition: all 0.3s ease; /* Geçiş efekti */
+            width: 100%;              /* Tam genişlik */
+        }
+
+        /* Buton hover durumu */
+        button:hover {
+            background-color: #eab6ff; /* Hover rengi */
+            transform: scale(1.02);    /* Büyütme efekti */
+        }
+
+        /* Bildirim mesajı stili */
+        .notification {
+            display: none;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .notification.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<!-- Sayfa içeriği başlangıcı -->
+<body>
+    <!-- Form ve içerik konteyneri -->
+    <div class="contact-container">
+        <!-- Sayfa başlığı -->
+        <h1>Bana Ulaş</h1>
+
+        <!-- İletişim formu -->
+        <form id="contactForm">
+            <!-- İsim giriş alanı -->
+            <div class="form-group">
+                <label for="name">İsim</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <!-- E-posta giriş alanı -->
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <!-- Mesaj giriş alanı -->
+            <div class="form-group">
+                <label for="message">Mesaj</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <!-- Gönder butonu -->
+            <button type="submit">Gönder</button>
+        </form>
+
+        <!-- Bildirim mesajı -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <!-- JavaScript kodları başlangıcı -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const notification = document.getElementById('notification');
+
+            // Form verilerini hazırla
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('message', message);
+
+            try {
+                // E-posta gönderme işlemi için bir API endpoint'i kullanabilirsiniz
+                // Örnek olarak:
+                const response = await fetch('https://api.example.com/send-email', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Başarılı gönderim
+                    notification.textContent = 'Mesajınız başarıyla gönderildi!';
+                    notification.className = 'notification success';
+                    notification.style.display = 'block';
+                    
+                    // Formu temizle
+                    document.getElementById('contactForm').reset();
+                } else {
+                    throw new Error('Gönderim başarısız');
+                }
+            } catch (error) {
+                // Hata durumu
+                notification.textContent = 'Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.';
+                notification.className = 'notification error';
+                notification.style.display = 'block';
+            }
+
+            // 5 saniye sonra bildirimi gizle
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+
+<!-- HTML belgesinin sonu -->
+</html> 
