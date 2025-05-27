@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ortadaki Resim</title>
+  <style>
+    /* Sayfa genelini ortalamak için */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+      gap: 20px; /* Resim ve buton arasında boşluk */
+    }
+    
+    /* Resmi küçültmek için */
+    img {
+      width: 400px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Yuvarlak buton stili */
+    .play-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #cddfff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .play-button:hover {
+      background-color: #b6cbff;
+      transform: scale(1.1);
+    }
+
+    /* Play ikonu stili */
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 20px;
+      border-color: transparent transparent transparent #222c54;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <img src="medya/sadhamster.jpg" alt="Ortadaki Görsel">
+  
+  <button class="play-button" onclick="playAudio()">
+    <div class="play-icon"></div>
+  </button>
+
+  <!-- Audio elementi (başlangıçta gizli) -->
+  <audio id="sadAudio" src="medya/sadhamster.mp3"></audio>
+
+  <script>
+    const audio = document.getElementById('sadAudio');
+    
+    // Hata yakalama
+    audio.addEventListener('error', function(e) {
+      console.error('Audio error:', e);
+      alert('Ses dosyası yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.');
+    });
+
+    function playAudio() {
+      if (audio.paused) {
+        audio.play().catch(function(error) {
+          console.log('Play error:', error);
+          alert('Ses çalınamadı: ' + error.message);
+        });
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+  </script>
+</body>
+</html>

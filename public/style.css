@@ -77,25 +77,81 @@ body {
   transform: scale(1.1); /* Biraz büyüsün */
   background-color: #b6cbff; /* Renk değişimi */
 }
+#button2{
+  position: absolute;
+  bottom: 30px;
+  left: 600px;
+  font-size: 26px;
+  padding: 18px 40px;
+  background-color: #cddfff;
+  color: #222c54;
+  border: none;
+  border-radius: 50px; /* Oval yapı */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5; /* Her şeyin üstünde */
+}
 
-.circle-btn {
+/* Buton hover efekti */
+#button2:hover {
+  transform: scale(1.1); /* Biraz büyüsün */
+  background-color: #b6cbff; /* Renk değişimi */
+}
+/* Buton ve mesajı yan yana koyan kapsayıcı */
+.buton-grup {
+  display: flex;
+  align-items: center;
+  position: relative; /* İçindeki elemanları konumlandırmak için */
+  flex-direction: row;
+}
+.buton-container {
+  display: flex;
+  flex-direction: column; /* Alt alta sıralar */
+  gap: 20px;              /* Butonlar arası boşluk */
+  align-items: flex-start; /* sola hizala (istersen center da yapabilirsin) */
+  padding: 20px;
+}
+
+/* Yuvarlak buton stili */
+.yuvarlak-buton {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   border: none;
+  background-color: #6c5ce7;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
-  position: absolute;
-  right:650px;
-  transition: transform 0.2s;
 }
-.circle-btn:hover {
-  transform: scale(1.1); /* hover büyüme efekti */
+
+/* Mesaj alanı – başlangıçta görünmez */
+.mesaj-alani {
+  opacity: 0;               /* görünmez */
+  transition: opacity 0.3s; /* geçiş efekti */
+  font-size: 15px;
+  color: #2d3436;
+  font-weight: 600;
+  pointer-events: none;     /* fare etkileşimini kapat */
 }
-.buton-metin {
-  position: absolute;
-  width: 200px;
-  right: 400px;
-  padding: 8px 12px;
+
+/* Hover olunca mesajı göster */
+.buton-grup:hover .mesaj-alani {
+  opacity: 1;
+}
+#hoverVideoKutusu {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: none; /* Hover yoksa görünmesin */
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
   border-radius: 10px;
- font-weight: bold;
+  overflow: hidden;
+}
+
+#hoverVideo {
+  display: block;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
 }
