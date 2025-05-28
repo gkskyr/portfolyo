@@ -166,6 +166,79 @@
 
     <!-- JavaScript kodları başlangıcı -->
     <script>
+        // Email verification using Abstract API
+        async function verifyEmail(email) {
+            try {
+                const apiKey = '037cadbf56f94ccab92181dbaf6e62ff'; // Your Abstract API key
+                const response = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`);
+                const data = await response.json();
+
+                console.log('Verification results:', data);
+
+                if (data.deliverability === "UNDELIVERABLE") {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresine ulaşılamıyor.'
+                    };
+                }
+
+                if (data.is_disposable_email.value) {
+                    return {
+                        isValid: false,
+                        message: 'Geçici email adresleri kabul edilmemektedir.'
+                    };
+                }
+
+                if (data.is_role_email.value) {
+                    return {
+                        isValid: false,
+                        message: 'Lütfen kişisel email adresinizi kullanın (info@, admin@ vb. kabul edilmez).'
+                    };
+                }
+
+                if (!data.is_valid_format.value) {
+                    return {
+                        isValid: false,
+                        message: 'Geçersiz email formatı.'
+                    };
+                }
+
+                // Check quality score
+                if (data.quality_score < 0.7) {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresi güvenilir görünmüyor.'
+                    };
+                }
+
+                return {
+                    isValid: true,
+                    message: ''
+                };
+
+            } catch (error) {
+                console.error('Email verification error:', error);
+                // Fallback to basic validation if API fails
+                return {
+                    isValid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+                    message: ''
+                };
+            }
+        }
+
+        // Debounce function to limit API calls
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -173,6 +246,20 @@
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             const notification = document.getElementById('notification');
+
+            // Show loading message
+            notification.textContent = 'Email doğrulanıyor...';
+            notification.className = 'notification';
+            notification.style.display = 'block';
+
+            // Verify email
+            const emailVerification = await verifyEmail(email);
+            if (!emailVerification.isValid) {
+                notification.textContent = emailVerification.message;
+                notification.className = 'notification error';
+                notification.style.display = 'block';
+                return;
+            }
 
             // Create the data object
             const data = {
@@ -182,7 +269,6 @@
             };
 
             try {
-                // Log the request attempt
                 console.log('Attempting to send data:', data);
 
                 const response = await fetch('https://portfolyo-1.onrender.com/api/contact', {
@@ -200,12 +286,10 @@
                     const responseData = await response.json();
                     console.log('Success response:', responseData);
                     
-                    // Başarılı gönderim
                     notification.textContent = 'Mesajınız başarıyla gönderildi!';
                     notification.className = 'notification success';
                     notification.style.display = 'block';
                     
-                    // Formu temizle
                     document.getElementById('contactForm').reset();
                 } else {
                     const errorData = await response.text();
@@ -214,17 +298,38 @@
                 }
             } catch (error) {
                 console.error('Detailed error:', error);
-                // Hata durumu
                 notification.textContent = `Mesaj gönderilirken bir hata oluştu (${error.message}). Lütfen tekrar deneyin.`;
                 notification.className = 'notification error';
                 notification.style.display = 'block';
             }
 
-            // 5 saniye sonra bildirimi gizle
             setTimeout(() => {
                 notification.style.display = 'none';
             }, 5000);
         });
+
+        // Real-time email validation with debounce
+        document.getElementById('email').addEventListener('input', debounce(async function(e) {
+            const email = e.target.value;
+            const notification = document.getElementById('notification');
+            
+            if (email) {
+                notification.textContent = 'Email doğrulanıyor...';
+                notification.className = 'notification';
+                notification.style.display = 'block';
+
+                const verification = await verifyEmail(email);
+                if (!verification.isValid) {
+                    notification.textContent = verification.message;
+                    notification.className = 'notification error';
+                    notification.style.display = 'block';
+                } else {
+                    notification.style.display = 'none';
+                }
+            } else {
+                notification.style.display = 'none';
+            }
+        }, 1000)); // Wait 1 second after user stops typing
     </script>
 </body>
 
