@@ -15,6 +15,9 @@
     <!-- Sayfa başlığı -->
     <title>Bana Ulaş</title>
 
+    <!-- Add reCAPTCHA script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <!-- Sayfa içi CSS stilleri başlangıcı -->
     <style>
         /* Ana sayfa yapısı için temel stiller */
@@ -142,6 +145,21 @@
             40% { content: '..'; }
             60%, 100% { content: '...'; }
         }
+
+        /* Add reCAPTCHA container style */
+        .recaptcha-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .recaptcha-error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 
@@ -170,6 +188,14 @@
             <div class="form-group">
                 <label for="message">Mesaj</label>
                 <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <!-- Add reCAPTCHA -->
+            <div class="recaptcha-container">
+                <div class="g-recaptcha" data-sitekey="6Lea1UwrAAAAAPx9P6elIM759dvkLxM15djRkECR"></div>
+            </div>
+            <div id="recaptcha-error" class="recaptcha-error">
+                Lütfen robot olmadığınızı doğrulayın.
             </div>
 
             <!-- Gönder butonu -->
@@ -306,8 +332,17 @@
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             const notification = document.getElementById('notification');
+            const recaptchaError = document.getElementById('recaptcha-error');
 
-            // Show loading message with animation
+            // Verify reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                recaptchaError.style.display = 'block';
+                return;
+            }
+            recaptchaError.style.display = 'none';
+
+            // Show loading message
             notification.textContent = 'Email doğrulanıyor';
             notification.className = 'notification loading';
             notification.style.display = 'block';
@@ -325,11 +360,12 @@
             const data = {
                 name: name,
                 email: email,
-                message: message
+                message: message,
+                recaptchaToken: recaptchaResponse
             };
 
             try {
-                console.log('Attempting to send data:', data);
+                console.log('Attempting to send data:', { ...data, recaptchaToken: '[HIDDEN]' });
 
                 const response = await fetch('https://portfolyo-1.onrender.com/api/contact', {
                     method: 'POST',
@@ -340,8 +376,6 @@
                     body: JSON.stringify(data)
                 });
 
-                console.log('Response status:', response.status);
-
                 if (response.ok) {
                     const responseData = await response.json();
                     console.log('Success response:', responseData);
@@ -351,14 +385,16 @@
                     notification.style.display = 'block';
                     
                     document.getElementById('contactForm').reset();
+                    grecaptcha.reset(); // Reset reCAPTCHA after successful submission
                 } else {
-                    const errorData = await response.text();
-                    console.error('Server error response:', errorData);
-                    throw new Error(`Server error: ${response.status}`);
+                    const errorData = await response.json();
+                    notification.textContent = errorData.message || 'Bir hata oluştu. Lütfen tekrar deneyin.';
+                    notification.className = 'notification error';
+                    notification.style.display = 'block';
                 }
             } catch (error) {
                 console.error('Detailed error:', error);
-                notification.textContent = `Mesaj gönderilirken bir hata oluştu (${error.message}). Lütfen tekrar deneyin.`;
+                notification.textContent = `Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.`;
                 notification.className = 'notification error';
                 notification.style.display = 'block';
             }
