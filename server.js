@@ -53,7 +53,7 @@ app.post('/api/contact', async (req, res) => {
         // Email gönderme ayarları
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: 'goksukayar99@gmail.com',
+            to: 'goksukyr@gmail.com',
             subject: `Portfolyo İletişim Formu: ${name}`,
             text: `İsim: ${name}\nEmail: ${email}\nMesaj: ${message}`,
             html: `
