@@ -126,6 +126,22 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
+        /* Loading animation styles */
+        .notification.loading {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            color: #495057;
+        }
+        .notification.loading:after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
     </style>
 </head>
 
@@ -169,16 +185,33 @@
         // Email verification using Abstract API
         async function verifyEmail(email) {
             try {
-                const apiKey = '037cadbf56f94ccab92181dbaf6e62ff'; // Your Abstract API key
+                const apiKey = '037cadbf56f94ccab92181dbaf6e62ff';
                 const response = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`);
                 const data = await response.json();
 
                 console.log('Verification results:', data);
 
-                if (data.deliverability === "UNDELIVERABLE") {
+                // Check if email exists and is deliverable
+                if (data.deliverability === "UNDELIVERABLE" || data.deliverability === "UNKNOWN") {
                     return {
                         isValid: false,
-                        message: 'Bu email adresine ulaşılamıyor.'
+                        message: 'Bu email adresi mevcut değil veya ulaşılamıyor.'
+                    };
+                }
+
+                // Check SMTP validity
+                if (!data.is_smtp_valid.value) {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresi geçerli değil.'
+                    };
+                }
+
+                // Check if MX records exist
+                if (!data.is_mx_found.value) {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresinin mail sunucusu bulunamadı.'
                     };
                 }
 
@@ -203,11 +236,37 @@
                     };
                 }
 
-                // Check quality score
-                if (data.quality_score < 0.7) {
+                // Stricter quality score check
+                if (data.quality_score < 0.8) {
                     return {
                         isValid: false,
                         message: 'Bu email adresi güvenilir görünmüyor.'
+                    };
+                }
+
+                // Check for suspicious patterns
+                const suspiciousPatterns = [
+                    /[0-9]{6,}/, // Too many consecutive numbers
+                    /[a-zA-Z0-9]{15,}/, // Too long without separators
+                    /[^a-zA-Z0-9._%+-]+/ // Invalid characters
+                ];
+
+                const localPart = email.split('@')[0];
+                if (suspiciousPatterns.some(pattern => pattern.test(localPart))) {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresi şüpheli karakterler içeriyor.'
+                    };
+                }
+
+                // Additional check for common email providers
+                const commonProviders = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+                const domain = email.split('@')[1].toLowerCase();
+                
+                if (commonProviders.includes(domain) && data.deliverability !== "DELIVERABLE") {
+                    return {
+                        isValid: false,
+                        message: 'Bu email adresi yaygın bir sağlayıcıya ait ancak geçerli görünmüyor.'
                     };
                 }
 
@@ -219,9 +278,10 @@
             } catch (error) {
                 console.error('Email verification error:', error);
                 // Fallback to basic validation if API fails
+                const basicEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return {
-                    isValid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-                    message: ''
+                    isValid: basicEmailRegex.test(email),
+                    message: basicEmailRegex.test(email) ? '' : 'Email formatı geçersiz.'
                 };
             }
         }
@@ -247,9 +307,9 @@
             const message = document.getElementById('message').value;
             const notification = document.getElementById('notification');
 
-            // Show loading message
-            notification.textContent = 'Email doğrulanıyor...';
-            notification.className = 'notification';
+            // Show loading message with animation
+            notification.textContent = 'Email doğrulanıyor';
+            notification.className = 'notification loading';
             notification.style.display = 'block';
 
             // Verify email
@@ -314,8 +374,8 @@
             const notification = document.getElementById('notification');
             
             if (email) {
-                notification.textContent = 'Email doğrulanıyor...';
-                notification.className = 'notification';
+                notification.textContent = 'Email doğrulanıyor';
+                notification.className = 'notification loading';
                 notification.style.display = 'block';
 
                 const verification = await verifyEmail(email);
