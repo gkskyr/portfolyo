@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Erkan Alagöz</title>
+    <title>GÖKSU KAYAR - CV</title>
     <style>
         * {
             margin: 0;
@@ -13,47 +13,82 @@
         }
 
         body {
-            background-color: #f5f5f5;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
         }
 
         .cv-container {
-            background-color: white;
-            max-width: 800px;
-            width: 100%;
+            background: white;
             padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
 
         .header {
             display: flex;
+            gap: 30px;
             align-items: flex-start;
-            gap: 40px;
             margin-bottom: 40px;
         }
 
-        .profile-img {
-            width: 200px;
-            height: 200px;
+        .profile-pic {
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
         }
 
         .name-title {
-            flex-grow: 1;
+            flex: 1;
         }
 
-        h1 {
-            font-size: 36px;
+        .name {
+            font-size: 42px;
+            font-weight: bold;
             margin-bottom: 10px;
-            letter-spacing: 2px;
         }
 
-        h2 {
-            font-size: 24px;
+        .title {
+            font-size: 20px;
             color: #666;
+            padding: 5px 15px;
+            background: #f0f0f0;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .contact {
+            text-align: right;
+        }
+
+        .contact a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact a:hover {
+            color: #4a90e2;
+        }
+
+        .about-text {
+            line-height: 1.6;
+            color: #444;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .section {
             margin-bottom: 30px;
         }
 
@@ -62,143 +97,327 @@
             font-weight: bold;
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 2px solid #333;
-        }
-
-        .contact-info {
-            margin-bottom: 30px;
-        }
-
-        .contact-info p {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skills-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .skills-list li {
-            margin-bottom: 8px;
-        }
-
-        .languages-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .languages-list li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            border-bottom: 2px solid #4a90e2;
         }
 
         .experience-item {
             margin-bottom: 20px;
         }
 
-        .experience-item h3 {
-            font-size: 18px;
+        .experience-title {
+            font-weight: bold;
             margin-bottom: 5px;
         }
 
-        .experience-item p {
+        .experience-date {
             color: #666;
+            font-size: 14px;
             margin-bottom: 10px;
         }
 
-        .education-item {
-            margin-bottom: 20px;
+        .skills-list {
+            list-style: none;
         }
 
-        .certification-item {
+        .skills-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skills-list li:before {
+            content: "•";
+            color: #4a90e2;
+            position: absolute;
+            left: 0;
+        }
+
+        .education-item {
             margin-bottom: 15px;
+        }
+
+        .education-title {
+            font-weight: bold;
+        }
+
+        .education-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .languages-list {
+            list-style: none;
+        }
+
+        .languages-list li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .language-level {
+            color: #666;
+        }
+
+        .certificates-list {
+            list-style: none;
+        }
+
+        .certificates-list li {
+            margin-bottom: 12px;
+        }
+
+        .certificate-date {
+            color: #666;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .download-button-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .download-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        .download-button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .mini-download-buttons {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .show-download-buttons .mini-download-buttons {
+            display: flex;
+        }
+
+        .mini-download-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .mini-download-button:hover {
+            transform: scale(1.05);
+            background-color: #1976D2;
+        }
+
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4a90e2;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .lang-toggle:hover {
+            background: #357abd;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .lang-toggle .active {
+            color: #ffeb3b;
         }
     </style>
 </head>
 <body>
     <div class="cv-container">
         <div class="header">
-            <img src="medya/cv-photo.jpg" alt="Profil Fotoğrafı" class="profile-img">
-            <div class="name-title">
-                <h1>ERKAN<br>ALAGÖZ</h1>
-                <h2>Yazılım Mühendisi</h2>
+            <img src="medya/benn.jpg" alt="Göksu Kayar" class="profile-pic">
+            <div class="header-content">
+                <div class="name-title">
+                    <h1 class="name">GÖKSU<br>KAYAR</h1>
+                    <div class="title" data-tr="Yazılım Mühendisi" data-en="Software Engineer">Yazılım Mühendisi</div>
+                </div>
+                <div class="contact">
+                    <a onclick="window.location.href='banaulas.html'">goksukyr@gmail.com</a>
+                    <a href="https://www.goksukayar.com">www.goksukayar.com</a>
+                </div>
             </div>
         </div>
 
-        <div class="contact-info">
-            <h3 class="section-title">İLETİŞİM</h3>
-            <p>📞 +90 212 123 24 25</p>
-            <p>📧 erkan@alagoz.web.tr</p>
-            <p>🌐 www.harikasite.web.tr</p>
+        <div class="section">
+            <h2 class="section-title" data-tr="HAKKIMDA" data-en="ABOUT ME">HAKKIMDA</h2>
+            <p class="about-text" data-tr="Yazılım mühendisliği öğrencisiyim. BCI, oyun teknolojileri ve etkileşimli arayüzlerle ilgileniyorum. Hedefim, insan beyninden alınan sinyalleri gerçek dünya uygulamalarına dönüştürmek" 
+               data-en="I am a software engineering student. I am interested in BCI, game technologies and interactive interfaces. My goal is to transform signals from the human brain into real-world applications">
+                Yazılım mühendisliği öğrencisiyim. BCI, oyun teknolojileri ve etkileşimli arayüzlerle ilgileniyorum. Hedefim, insan beyninden alınan sinyalleri gerçek dünya uygulamalarına dönüştürmek
+            </p>
         </div>
 
-        <div class="about">
-            <h3 class="section-title">HAKKIMDA</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis dapibus aliquam. Sed mollis dapibus congue.</p>
+        <div class="section">
+            <h2 class="section-title" data-tr="İŞ DENEYİMİ" data-en="WORK EXPERIENCE">İŞ DENEYİMİ</h2>
+            <div class="experience-item">
+                <div class="experience-title" data-tr="Gameplay Geliştirici - Ninja Theory, Hellblade: Senua's Sacrifice (2017)" 
+                     data-en="Gameplay Developer - Ninja Theory, Hellblade: Senua's Sacrifice (2017)">
+                    Gameplay Geliştirici - Ninja Theory, Hellblade: Senua's Sacrifice (2017)
+                </div>
+                <ul class="skills-list">
+                    <li data-tr="Dövüş sistemi kodlama, yapay zeka ayarı, etkileşimli oyun tasarımı" 
+                        data-en="Combat system coding, AI adjustment, interactive game design">
+                        Dövüş sistemi kodlama, yapay zeka ayarı, etkileşimli oyun tasarımı
+                    </li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <div class="experience-title" data-tr="NLP & BCI Araştırmacısı - OpenWater, ThoughtSpeak Projesi (2024)" 
+                     data-en="NLP & BCI Researcher - OpenWater, ThoughtSpeak Project (2024)">NLP & BCI Araştırmacısı - OpenWater, ThoughtSpeak Projesi (2024)</div>
+                <div class="experience-date">2024-2025</div>
+                <ul class="skills-list">
+                    <li data-tr="EEG üzerinden alınan sinyallerler kelime tahmini yapan NLP modeli eğitimi"
+                        data-en="Trained NLP model for word prediction using EEG signals">EEG üzerinden alınan sinyallerler kelime tahmini yapan NLP modeli eğitimi</li>
+                    <li data-tr="Transformer mimarisiyle zihin-gönderimli yazı yazma prototipi oluşturdum"
+                        data-en="Developed mind-to-text writing prototype using Transformer architecture">Transformer mimarisiyle zihin-gönderimli yazı yazma prototipi oluşturdum</li>
+                    <li data-tr="Zhinsel chatbot beslemek için PyTorch tabanlı model tasarladım"
+                        data-en="Designed PyTorch-based model for mental chatbot training">Zhinsel chatbot beslemek için PyTorch tabanlı model tasarladım</li>
+                    <li data-tr="Kullanıcı geri bildirimiyle kişiselleştirilmiş dil modeli geliştirdim"
+                        data-en="Developed personalized language model with user feedback">Kullanıcı geri bildirimiyle kişiselleştirilmiş dil modeli geliştirdim</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="skills">
-            <h3 class="section-title">BECERİLER</h3>
+        <div class="section">
+            <h2 class="section-title" data-tr="BECERİLER" data-en="SKILLS">BECERİLER</h2>
             <ul class="skills-list">
-                <li>✓ Zaman yönetimi</li>
-                <li>✓ Ekip çalışması</li>
-                <li>✓ Analitik Düşünme</li>
-                <li>✓ İnovatif Yaklaşım</li>
+                <li data-tr="Olumlu düşünmeye yatkınım" data-en="Positive thinking mindset">Olumlu düşünmeye yatkınım</li>
+                <li data-tr="Sorun çözme odaklıyım" data-en="Problem-solving focused">Sorun çözme odaklıyım</li>
+                <li data-tr="İşimi ciddiye alırım" data-en="Takes work seriously">İşimi ciddiye alırım</li>
+                <li data-tr="Grup çalışmasına açığım" data-en="Open to teamwork">Grup çalışmasına açığım</li>
             </ul>
         </div>
 
-        <div class="languages">
-            <h3 class="section-title">DİLLER</h3>
-            <ul class="languages-list">
-                <li>🌐 İngilizce C2</li>
-                <li>🌐 Almanca C2</li>
-                <li>🌐 Korece B1</li>
-            </ul>
-        </div>
-
-        <div class="experience">
-            <h3 class="section-title">İŞ DENEYİMİ</h3>
-            <div class="experience-item">
-                <h3>YAZILIM GELİŞTİRİCİ</h3>
-                <p>Harika Şirket - Ankara • 2017-2022</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis dapibus aliquam. Sed mollis dapibus congue.</p>
-            </div>
-            <div class="experience-item">
-                <h3>YAZILIM GELİŞTİRİCİ</h3>
-                <p>Başka Harika Şirket - Ankara • 2017-2022</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis dapibus aliquam. Sed mollis dapibus congue.</p>
-            </div>
-        </div>
-
-        <div class="education">
-            <h3 class="section-title">EĞİTİM</h3>
+        <div class="section">
+            <h2 class="section-title" data-tr="EĞİTİM" data-en="EDUCATION">EĞİTİM</h2>
             <div class="education-item">
-                <h3>DERYALAR ÜNİVERSİTESİ</h3>
-                <p>Bilgisayar Mühendisliği</p>
-                <p>2007-2011</p>
+                <div class="education-title" data-tr="Fırat Üniversitesi" data-en="Firat University">Fırat Üniversitesi</div>
+                <div class="education-date">2022-2027</div>
             </div>
         </div>
 
-        <div class="certifications">
-            <h3 class="section-title">SERTİFİKALAR</h3>
-            <div class="certification-item">
-                <p>2023-2024 • Bilgi Sistemleri Sertifikası</p>
-                <p>Deryalar Üniversitesi</p>
-            </div>
-            <div class="certification-item">
-                <p>2023-2024 • Programlama Dili Sertifikası</p>
-                <p>Deryalar Üniversitesi</p>
-            </div>
-            <div class="certification-item">
-                <p>2023-2024 • Bilgi güvenliği sertifikası</p>
-                <p>Deryalar Üniversitesi</p>
-            </div>
+        <div class="section">
+            <h2 class="section-title" data-tr="SERTİFİKALAR" data-en="CERTIFICATES">SERTİFİKALAR</h2>
+            <ul class="certificates-list">
+                <li>
+                    <span class="certificate-date">2025-2026</span>
+                    <span data-tr="Hesaplamalı Sinirbilim" data-en="Computational Neuroscience">Hesaplamalı Sinirbilim</span>
+                    <div data-tr="Washington Üniversitesi" data-en="University of Washington">Washington Üniversitesi</div>
+                </li>
+                <li>
+                    <span class="certificate-date">2025-2026</span>
+                    <span data-tr="Zihin ve Makine" data-en="Mind and Machine">Zihin ve Makine</span>
+                    <div data-tr="Colorado Boulder Üniversitesi" data-en="University of Colorado Boulder">Colorado Boulder Üniversitesi</div>
+                </li>
+                <li>
+                    <span class="certificate-date">2025-2026</span>
+                    <span data-tr="Nörogörüntüleme için Temel Sinirbilim" data-en="Basic Neuroscience for Neuroimaging">Nörogörüntüleme için Temel Sinirbilim</span>
+                    <div data-tr="Johns Hopkins Üniversitesi" data-en="Johns Hopkins University">Johns Hopkins Üniversitesi</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title" data-tr="DİLLER" data-en="LANGUAGES">DİLLER</h2>
+            <ul class="languages-list">
+                <li>
+                    <span data-tr="İngilizce" data-en="English">İngilizce</span>
+                    <span class="language-level">C2</span>
+                </li>
+                <li>
+                    <span data-tr="Japonca" data-en="Japanese">Japonca</span>
+                    <span class="language-level">N3</span>
+                </li>
+            </ul>
         </div>
     </div>
+
+    <!-- Download button container -->
+    <div class="download-button-wrapper">
+        <div class="mini-download-buttons">
+            <button class="mini-download-button" onclick="downloadCV('tr')">Türkçe CV</button>
+            <button class="mini-download-button" onclick="downloadCV('en')">English CV</button>
+        </div>
+        <button class="download-button" onclick="toggleDownloadButtons()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Language functionality (without toggle button)
+        function updatePageLanguage() {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
+            
+            // Update all elements with data-tr and data-en attributes
+            document.querySelectorAll('[data-tr][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+
+            // Update page title
+            document.title = currentLang === 'tr' ? 'GÖKSU KAYAR - CV' : 'GÖKSU KAYAR - Resume';
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', updatePageLanguage);
+
+        function toggleDownloadButtons() {
+            document.querySelector('.download-button-wrapper').classList.toggle('show-download-buttons');
+        }
+
+        function downloadCV(lang) {
+            const filename = lang === 'tr' ? 'cvturk.pdf' : 'cveng.pdf';
+            const link = document.createElement('a');
+            link.href = `medya/${filename}`;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </body>
 </html> 

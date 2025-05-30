@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,20 +39,36 @@
     </style>
 </head>
 <body>
-    <img src="medya/sadhamster.jpg" alt="Sad Hamster">
-    <button onclick="playAudio()" id="playButton">🎻</button>
-    <audio id="hamsterAudio" src="medya/sadhamster.mp3"></audio>
+    <div class="content">
+        <img src="medya/sadhamster.jpg" alt="Sad Hamster" class="hamster-image">
+        <p class="description" data-tr="Üzgün hamster sesi" data-en="Sad hamster sound">Üzgün hamster sesi</p>
+        <audio id="hamsterSound" src="medya/sadhamster.mp3"></audio>
+        <button onclick="playSound()" class="play-button" data-tr="Sesi Çal" data-en="Play Sound">Sesi Çal</button>
+    </div>
 
     <script>
-        function playAudio() {
-            const audio = document.getElementById('hamsterAudio');
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-                audio.currentTime = 0;
-            }
+        function playSound() {
+            document.getElementById('hamsterSound').play();
         }
+
+        // Language functionality (without toggle)
+        function updatePageLanguage() {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
+            
+            // Update all elements with data-tr and data-en attributes
+            document.querySelectorAll('[data-tr][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+
+            // Update page title
+            document.title = currentLang === 'tr' ? 'Üzgün Hamster' : 'Sad Hamster';
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', updatePageLanguage);
     </script>
 </body>
 </html> 

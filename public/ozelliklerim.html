@@ -4,31 +4,52 @@
   <meta charset="UTF-8">     <!-- 3. Karakter seti UTF-8 olmalı -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
                              <!-- 4. Mobil uyum için ekran ayarı -->
-  <title>ozelliklerim</title>  <!-- 5. Tarayıcı sekmesinde görünen başlık -->
+  <title>Özelliklerim</title>  <!-- 5. Tarayıcı sekmesinde görünen başlık -->
   <body style="background-color: #fff8b7;">
   <!-- 6. Stil dosyasını bağla (zorunlu değil ama gerekli) -->
   <link rel="stylesheet" href="style.css">
  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
+
   <div class="buton-container">
    <div class="buton-grup">
-    <button class="yuvarlak-buton" data-video="medya/video1.mp4">1</button>
-    <span class="mesaj-alani" >Ben 1. butonum</span>
+    <button class="yuvarlak-buton" data-video="medya/video1.mp4"></button>
+    <span class="mesaj-alani" > ÇOK YÖNLÜYÜMDÜR </span>
 
   </div>
 
   <div class="buton-grup">
-    <button class="yuvarlak-buton"  data-video="medya/video2.mp4">2</button>
-    <span class="mesaj-alani">2 numara burada!</span>
-   
+    <button class="yuvarlak-buton"  data-video="medya/video2.mp4"></button>
+    <span class="mesaj-alani">  MERAKLIYIMDIR</span>
   </div>
 
   <div class="buton-grup">
-    <button class="yuvarlak-buton"  data-video="medya/video3.mp4">3</button>
-    <span class="mesaj-alani">Selam, ben 3 ☺</span>
-  
+    <button class="yuvarlak-buton"  data-video="medya/video3.mp4"></button>
+    <span class="mesaj-alani">  POZİTİFİMDİR</span>
   </div>
+
+  <div class="buton-grup">
+    <button class="yuvarlak-buton"  data-video="medya/video4.mp4"></button>
+    <span class="mesaj-alani"> UYUMLUYUMDUR</span>
+  </div>
+
+  <div class="buton-grup">
+    <button class="yuvarlak-buton"  data-video="medya/video5.mp4"></button>
+    <span class="mesaj-alani"> ÇÖZÜM ODAKLIYIMDIR</span>
+  </div>
+
+  <div class="buton-grup">
+    <button class="yuvarlak-buton"  data-video="medya/video6.mp4"></button>
+    <span class="mesaj-alani">  YARATICIYIMDIR</span>
+  </div>
+
+  <div class="buton-grup">
+    <button class="yuvarlak-buton"  data-video="medya/video7.mp4"></button>
+    <span class="mesaj-alani">  MÜKEMMELİYETÇİYİMDİR</span>
+  </div>
+
   </div>
 <div id="hoverVideoKutusu">
   <video id="hoverVideo" width="300" muted autoplay loop>
@@ -40,5 +61,26 @@
 
   <!-- 8. JavaScript dosyası (zorunlu değil ama etkileşim için şart) -->
   <script src="script.js"></script>
+
+  <script>
+    // Language functionality (without toggle)
+    function updatePageLanguage() {
+      const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
+      
+      // Update all elements with data-tr and data-en attributes
+      document.querySelectorAll('[data-tr][data-en]').forEach(element => {
+        element.textContent = element.getAttribute(`data-${currentLang}`);
+      });
+
+      // Update HTML lang attribute
+      document.documentElement.lang = currentLang;
+
+      // Update page title
+      document.title = currentLang === 'tr' ? 'Özelliklerim' : 'My Features';
+    }
+
+    // Initialize language on page load
+    document.addEventListener('DOMContentLoaded', updatePageLanguage);
+  </script>
 </body>
 </html>

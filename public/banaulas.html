@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Sayfa başlığı -->
-    <title>Bana Ulaş</title>
+    <title>İletişim</title>
 
     <!-- Add reCAPTCHA script -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -168,25 +168,25 @@
     <!-- Form ve içerik konteyneri -->
     <div class="contact-container">
         <!-- Sayfa başlığı -->
-        <h1>Bana Ulaş</h1>
+        <h1 data-tr="Bana Ulaş" data-en="Contact Me">Bana Ulaş</h1>
 
         <!-- İletişim formu -->
         <form id="contactForm">
             <!-- İsim giriş alanı -->
             <div class="form-group">
-                <label for="name">İsim</label>
+                <label for="name" data-tr="İsim" data-en="Name">İsim</label>
                 <input type="text" id="name" name="name" required>
             </div>
 
             <!-- E-posta giriş alanı -->
             <div class="form-group">
-                <label for="email">E-posta</label>
+                <label for="email" data-tr="E-posta" data-en="Email">E-posta</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <!-- Mesaj giriş alanı -->
             <div class="form-group">
-                <label for="message">Mesaj</label>
+                <label for="message" data-tr="Mesaj" data-en="Message">Mesaj</label>
                 <textarea id="message" name="message" required></textarea>
             </div>
 
@@ -194,12 +194,12 @@
             <div class="recaptcha-container">
                 <div class="g-recaptcha" data-sitekey="6Lea1UwrAAAAAPx9P6elIM759dvkLxM15djRkECR"></div>
             </div>
-            <div id="recaptcha-error" class="recaptcha-error">
+            <div id="recaptcha-error" class="recaptcha-error" data-tr="Lütfen robot olmadığınızı doğrulayın." data-en="Please verify that you are not a robot.">
                 Lütfen robot olmadığınızı doğrulayın.
             </div>
 
             <!-- Gönder butonu -->
-            <button type="submit">Gönder</button>
+            <button type="submit" data-tr="Gönder" data-en="Send">Gönder</button>
         </form>
 
         <!-- Bildirim mesajı -->
@@ -208,6 +208,25 @@
 
     <!-- JavaScript kodları başlangıcı -->
     <script>
+        // Language functionality (without toggle)
+        function updatePageLanguage() {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
+            
+            // Update all elements with data-tr and data-en attributes
+            document.querySelectorAll('[data-tr][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+
+            // Update page title
+            document.title = currentLang === 'tr' ? 'İletişim' : 'Contact';
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', updatePageLanguage);
+
         // Email verification using Abstract API
         async function verifyEmail(email) {
             try {
@@ -343,14 +362,40 @@
             recaptchaError.style.display = 'none';
 
             // Show loading message
-            notification.textContent = 'Email doğrulanıyor';
+            notification.textContent = currentLang === 'tr' ? 'Email doğrulanıyor' : 'Verifying email';
             notification.className = 'notification loading';
             notification.style.display = 'block';
 
             // Verify email
             const emailVerification = await verifyEmail(email);
             if (!emailVerification.isValid) {
-                notification.textContent = emailVerification.message;
+                const messages = {
+                    tr: {
+                        'undeliverable': 'Bu email adresi mevcut değil veya ulaşılamıyor.',
+                        'invalid': 'Bu email adresi geçerli değil.',
+                        'no_mx': 'Bu email adresinin mail sunucusu bulunamadı.',
+                        'disposable': 'Geçici email adresleri kabul edilmemektedir.',
+                        'role': 'Lütfen kişisel email adresinizi kullanın (info@, admin@ vb. kabul edilmez).',
+                        'format': 'Geçersiz email formatı.',
+                        'quality': 'Bu email adresi güvenilir görünmüyor.',
+                        'suspicious': 'Bu email adresi şüpheli karakterler içeriyor.',
+                        'common_provider': 'Bu email adresi yaygın bir sağlayıcıya ait ancak geçerli görünmüyor.'
+                    },
+                    en: {
+                        'undeliverable': 'This email address does not exist or is unreachable.',
+                        'invalid': 'This email address is not valid.',
+                        'no_mx': 'Mail server for this email address could not be found.',
+                        'disposable': 'Temporary email addresses are not accepted.',
+                        'role': 'Please use your personal email address (info@, admin@ etc. are not accepted).',
+                        'format': 'Invalid email format.',
+                        'quality': 'This email address does not appear to be reliable.',
+                        'suspicious': 'This email address contains suspicious characters.',
+                        'common_provider': 'This email address belongs to a common provider but appears to be invalid.'
+                    }
+                };
+
+                const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
+                notification.textContent = messages[currentLang][emailVerification.type] || emailVerification.message;
                 notification.className = 'notification error';
                 notification.style.display = 'block';
                 return;
@@ -380,21 +425,27 @@
                     const responseData = await response.json();
                     console.log('Success response:', responseData);
                     
-                    notification.textContent = 'Mesajınız başarıyla gönderildi!';
+                    notification.textContent = currentLang === 'tr' ? 
+                        'Mesajınız başarıyla gönderildi!' : 
+                        'Your message has been sent successfully!';
                     notification.className = 'notification success';
                     notification.style.display = 'block';
                     
                     document.getElementById('contactForm').reset();
-                    grecaptcha.reset(); // Reset reCAPTCHA after successful submission
+                    grecaptcha.reset();
                 } else {
                     const errorData = await response.json();
-                    notification.textContent = errorData.message || 'Bir hata oluştu. Lütfen tekrar deneyin.';
+                    notification.textContent = currentLang === 'tr' ? 
+                        errorData.message || 'Bir hata oluştu. Lütfen tekrar deneyin.' :
+                        errorData.message || 'An error occurred. Please try again.';
                     notification.className = 'notification error';
                     notification.style.display = 'block';
                 }
             } catch (error) {
                 console.error('Detailed error:', error);
-                notification.textContent = `Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.`;
+                notification.textContent = currentLang === 'tr' ?
+                    'Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.' :
+                    'An error occurred while sending the message. Please try again.';
                 notification.className = 'notification error';
                 notification.style.display = 'block';
             }
@@ -408,15 +459,16 @@
         document.getElementById('email').addEventListener('input', debounce(async function(e) {
             const email = e.target.value;
             const notification = document.getElementById('notification');
+            const currentLang = localStorage.getItem('preferredLanguage') || 'tr';
             
             if (email) {
-                notification.textContent = 'Email doğrulanıyor';
+                notification.textContent = currentLang === 'tr' ? 'Email doğrulanıyor' : 'Verifying email';
                 notification.className = 'notification loading';
                 notification.style.display = 'block';
 
                 const verification = await verifyEmail(email);
                 if (!verification.isValid) {
-                    notification.textContent = verification.message;
+                    notification.textContent = currentLang === 'tr' ? verification.message : verification.messageEn;
                     notification.className = 'notification error';
                     notification.style.display = 'block';
                 } else {
@@ -425,7 +477,7 @@
             } else {
                 notification.style.display = 'none';
             }
-        }, 1000)); // Wait 1 second after user stops typing
+        }, 1000));
     </script>
 </body>
 

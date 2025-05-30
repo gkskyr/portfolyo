@@ -1,7 +1,7 @@
 /* Sayfa genel ayarları */
 body {
   margin: 0; /* Kenarlıkları sıfırla */
-  background-color: #f0f0f0; /* Arka plan rengi */
+  background-color: white; /* Arka plan rengi */
   display: flex; /* Ortalamak için flex kullan */
   justify-content: center; /* Yatay ortalama */
   align-items: center; /* Dikey ortalama */
@@ -76,7 +76,7 @@ body {
   height: 100%;
   font-size: 35px;
   position: relative;
-  background-color: #cddfff;
+  background-color: #b6cbff;
   color: #222c54;
   border: none;
   border-radius: 50px;
@@ -88,7 +88,7 @@ body {
 /* Hover efekti */
 .buton-wrapper:hover #button1 {
   transform: scale(1.1);
-  background-color: #b6cbff;
+  background-color: #fffcbd;
 }
 
 /* Minik buton sağda */
@@ -99,7 +99,7 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: #6c5ce7;
+  background-color:  #fffcbd;
   color: white;
   border: none;
   font-size: 30px;
@@ -119,12 +119,12 @@ body {
 /* Minik buton yukarıda */
 .mini-buton2 {
   position: absolute;
-  top: -60px;
+  top: -70px;
   right: -20px;
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: #6c5ce7;
+  background-color:  #fffcbd;
   color: white;
   border: none;
   font-size: 30px;
@@ -158,7 +158,7 @@ body {
 
 /* Ana buton tıklandığında efekt */
 .buton-wrapper.show-mini-buttons #button1 {
-  background-color: #b6cbff;
+  background-color: #fffcbd;
   transform: scale(1.1);
 }
 
@@ -180,7 +180,7 @@ body {
   height: 100%;
   font-size: 35px;
   position: relative;
-  background-color: #cddfff;
+  background-color: #b6cbff;
   color: #222c54;
   border: none;
   border-radius: 50px;
@@ -191,7 +191,7 @@ body {
 
 .buton2-wrapper:hover #button2 {
   transform: scale(1.1);
-  background-color: #b6cbff;
+  background-color: #c6b6ff;
 }
 
 /* Mini butonlar - button2 için */
@@ -262,7 +262,7 @@ body {
   position: absolute;
   bottom: 20px;
   left: 630px;
-  background-color: #cddfff;
+  background-color: #b6cbff;
   color: #222c54;
   border: none;
   border-radius: 50px; /* Oval yapı */
@@ -274,7 +274,7 @@ body {
 /* Buton hover efekti */
 #button3:hover {
   transform: scale(1.1); /* Biraz büyüsün */
-  background-color: #b6cbff; /* Renk değişimi */
+  background-color: #c6b6ff; /* Renk değişimi */
 }
 /* Buton ve mesajı yan yana koyan kapsayıcı */
 .buton-grup {
@@ -286,9 +286,10 @@ body {
 .buton-container {
   display: flex;
   flex-direction: column; /* Alt alta sıralar */
-  gap: 20px;              /* Butonlar arası boşluk */
-  align-items: flex-start; /* sola hizala (istersen center da yapabilirsin) */
+  gap: 45px;              /* Increased gap between buttons */
+  align-items: start; /* daha sola hizala */
   padding: 20px;
+  margin-right:880px; /* Increased left margin to move buttons further left */
 }
 
 /* Yuvarlak buton stili */
@@ -297,20 +298,30 @@ body {
   height: 60px;
   border-radius: 50%;
   border: none;
-  background-color: #6c5ce7;
-  color: white;
+  background-color: #b6cbff;
+  color: #222c54;
   font-size: 18px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yuvarlak-buton:hover {
+  background-color: #c6b6ff;
+  transform: scale(1.1);
 }
 
 /* Mesaj alanı – başlangıçta görünmez */
 .mesaj-alani {
-  opacity: 0;               /* görünmez */
-  transition: opacity 0.3s; /* geçiş efekti */
-  font-size: 15px;
-  color: #2d3436;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 40px;
+  color: #222c54;
   font-weight: 600;
-  pointer-events: none;     /* fare etkileşimini kapat */
+  pointer-events: none;
+  background-color: rgba(182, 203, 255, 0.9); /* #b6cbff with opacity */
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-left: 15px;
 }
 
 /* Hover olunca mesajı göster */
@@ -320,7 +331,7 @@ body {
 #hoverVideoKutusu {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 100px;
   display: none; /* Hover yoksa görünmesin */
   z-index: 999;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -330,7 +341,7 @@ body {
 
 #hoverVideo {
   display: block;
-  width: 300px;
+  width:700px;
   height: auto;
   border-radius: 10px;
 }
