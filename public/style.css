@@ -99,7 +99,7 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color:  #fffcbd;
+  background-color:  #b6cbff;
   color: white;
   border: none;
   font-size: 30px;
@@ -124,7 +124,7 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color:  #fffcbd;
+  background-color:  #b6cbff;
   color: white;
   border: none;
   font-size: 30px;
@@ -152,15 +152,12 @@ body {
 /* Mini butonlar hover efekti */
 .mini-buton1:hover,
 .mini-buton2:hover {
-  background-color: #5f4ed0;
+  background-color: #b6cbff;
   transform: scale(1.2);
 }
 
 /* Ana buton tıklandığında efekt */
-.buton-wrapper.show-mini-buttons #button1 {
-  background-color: #fffcbd;
-  transform: scale(1.1);
-}
+
 
 .buton2-wrapper {
   position: absolute;
@@ -202,7 +199,7 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: #6c5ce7;
+  background-color: #b6cbff;
   color: white;
   border: none;
   font-size: 30px;
@@ -223,7 +220,7 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: #6c5ce7;
+  background-color: #b6cbff;
   color: white;
   border: none;
   font-size: 30px;
@@ -248,7 +245,7 @@ body {
 /* Mini butonlar hover efekti */
 .mini-buton2-right:hover,
 .mini-buton2-top:hover {
-  background-color: #5f4ed0;
+  background-color: #b6cbff;
   transform: scale(1.2);
 }
 
@@ -274,7 +271,7 @@ body {
 /* Buton hover efekti */
 #button3:hover {
   transform: scale(1.1); /* Biraz büyüsün */
-  background-color: #c6b6ff; /* Renk değişimi */
+  background-color: #93a8df; /* Renk değişimi */
 }
 /* Buton ve mesajı yan yana koyan kapsayıcı */
 .buton-grup {
@@ -286,7 +283,7 @@ body {
 .buton-container {
   display: flex;
   flex-direction: column; /* Alt alta sıralar */
-  gap: 45px;              /* Increased gap between buttons */
+  gap: 25px;              /* Increased gap between buttons */
   align-items: start; /* daha sola hizala */
   padding: 20px;
   margin-right:880px; /* Increased left margin to move buttons further left */
@@ -296,9 +293,16 @@ body {
 .yuvarlak-buton {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  clip-path: polygon(
+    50% 0%, 
+    93% 25%, 
+    93% 75%, 
+    50% 100%, 
+    7% 75%, 
+    7% 25%
+  );
   border: none;
-  background-color: #b6cbff;
+  background-color: #ffbf29;
   color: #222c54;
   font-size: 18px;
   cursor: pointer;
@@ -306,7 +310,7 @@ body {
 }
 
 .yuvarlak-buton:hover {
-  background-color: #c6b6ff;
+  background-color: #ff9829;
   transform: scale(1.1);
 }
 
@@ -318,7 +322,7 @@ body {
   color: #222c54;
   font-weight: 600;
   pointer-events: none;
-  background-color: rgba(182, 203, 255, 0.9); /* #b6cbff with opacity */
+  background-color:none; /* #b6cbff with opacity */
   padding: 10px 20px;
   border-radius: 15px;
   margin-left: 15px;

@@ -12,7 +12,24 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #c6b6ff;
+        }
+        
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-right: 50px;
+        }
+        
+        .title-text {
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
         }
         
         img {
@@ -23,27 +40,38 @@
         }
         
         button {
-            padding: 15px 30px;
+            padding: 15px;
+            width: 80px;
+            height: 80px;
             font-size: 24px;
             border: none;
-            border-radius: 8px;
-            background-color: #4a90e2;
+            border-radius: 50%;
+            background-color: #9f86ff;
             color: white;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            position:absolute;
+            right:750px;
+            bottom:30px;
         }
         
         button:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            background-color: #8b6bff;
         }
     </style>
 </head>
 <body>
     <div class="content">
+        <p class="title-text" data-tr="mlsf bu benim ilk projem" data-en="mlsf this is my first project">mlsf bu benim ilk projem</p>
         <img src="medya/sadhamster.jpg" alt="Sad Hamster" class="hamster-image">
-        <p class="description" data-tr="Üzgün hamster sesi" data-en="Sad hamster sound">Üzgün hamster sesi</p>
         <audio id="hamsterSound" src="medya/sadhamster.mp3"></audio>
-        <button onclick="playSound()" class="play-button" data-tr="Sesi Çal" data-en="Play Sound">Sesi Çal</button>
+        <button onclick="playSound()" class="play-button" data-tr="🎻" data-en="🎻">🎻</button>
     </div>
 
     <script>
