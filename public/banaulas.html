@@ -26,10 +26,11 @@
             height: 100vh;                /* Tam ekran yüksekliği */
             display: flex;                /* Esnek kutu düzeni */
             flex-direction: column;       /* Dikey hizalama */
-            align-items: center;          /* Yatayda ortalama */
+            align-items: flex-start;      /* Sol hizalama */
             background-color: #b89fdb;    /* Mor arka plan */
             font-family: Arial, sans-serif; /* Yazı tipi */
             padding: 20px;                /* İç boşluk */
+            padding-left: 100px;          /* Sol padding ekle */
         }
 
         /* Form konteyneri için stiller */
@@ -160,11 +161,45 @@
             text-align: center;
             display: none;
         }
+
+        /* Media container styles */
+        .media-container {
+            position: fixed;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+        }
+
+        .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .media-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            display: none;
+        }
     </style>
 </head>
 
 <!-- Sayfa içeriği başlangıcı -->
 <body>
+    <!-- Media container -->
+    <div class="media-container">
+        <img src="medya/zıpla.jpg" alt="Zıpla">
+        <video id="successVideo" src="medya/zıpla.mp4"></video>
+    </div>
+
     <!-- Form ve içerik konteyneri -->
     <div class="contact-container">
         <!-- Sayfa başlığı -->
@@ -424,6 +459,19 @@
                 if (response.ok) {
                     const responseData = await response.json();
                     console.log('Success response:', responseData);
+                    
+                    // Play the success video
+                    const video = document.getElementById('successVideo');
+                    const img = document.querySelector('.media-container img');
+                    img.style.display = 'none';
+                    video.style.display = 'block';
+                    video.play();
+                    
+                    // Hide video when it ends
+                    video.addEventListener('ended', () => {
+                        video.style.display = 'none';
+                        img.style.display = 'block';
+                    });
                     
                     notification.textContent = currentLang === 'tr' ? 
                         'Mesajınız başarıyla gönderildi!' : 
