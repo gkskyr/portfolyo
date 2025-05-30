@@ -32,16 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Add click events only if buttons exist
-  if (button1) {
-    button1.addEventListener('click', () => {
-      window.location.href = "ozelliklerim.html";
-    });
-  }
-
+  // Button2 mini buttons toggle function
   if (button2) {
     button2.addEventListener('click', () => {
-      window.location.href = "yaptiklarim.html";
+      const wrapper = document.querySelector('.buton2-wrapper');
+      if (wrapper) {
+        wrapper.classList.toggle('show-mini-buttons');
+      }
     });
   }
 

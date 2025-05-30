@@ -116,7 +116,7 @@ async function verifyRecaptcha(token) {
             null,
             {
                 params: {
-                    secret: '6Lea1UwrAAAAANyRagViFE_r5X_pqj3SYqtdnmId',
+                    secret: process.env.RECAPTCHA_SECRET_KEY,
                     response: token
                 }
             }

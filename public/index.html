@@ -36,14 +36,25 @@
         <img id="rightPupil" src="medya/pupil.png" class="pupil right" alt="sağ göz">
     </div>
 
-    <!-- Özelliklerim sayfasına yönlendiren buton -->
-    <button id="button1">Özelliklerim</button>
-
-    <!-- Projelerim sayfasına yönlendiren buton -->
-    <button id="button2">Projelerim</button>
-
+    <div class="buton-wrapper">
+        <button class="mini-buton2" onclick="window.location.href='ozelliklerim.html'">💫</button>
+        <button id="button1" onclick="toggleMiniButtons()">Beni tanı</button>
+        <button class="mini-buton1" onclick="window.location.href='cv.html'">🫶</button>
+    </div>
+    <div class="buton2-wrapper">
+        <button class="mini-buton2-top" onclick="window.location.href='cv.html'">💫</button>
+        <button id="button2">yaptıklarım</button>
+        <button class="mini-buton2-right" onclick="window.location.href='ozelliklerim.html'">🫶</button>
+    </div>
     <!-- İletişim sayfasına yönlendiren buton -->
-    <button id="button3">İletişim</button>
+    <button id="button3">maille beni</button>
+
+    <!-- JavaScript dosyası bağlantısı - defer ile sayfa yüklendikten sonra çalışır -->
+    <script>
+        function toggleMiniButtons() {
+            document.querySelector('.buton-wrapper').classList.toggle('show-mini-buttons');
+        }
+    </script>
 </body>
 
 <!-- HTML belgesinin sonu -->
