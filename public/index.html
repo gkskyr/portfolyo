@@ -22,33 +22,6 @@
     <script src="script.js" defer></script>
 
     <style>
-        .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4a90e2;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .lang-toggle:hover {
-            background: #357abd;
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .lang-toggle .active {
-            color: #ffeb3b;
-        }
-
         .translate-prompt {
             display: none;
             position: fixed;
@@ -123,21 +96,11 @@
 
 <!-- Body bölümü başlangıcı - Sayfanın görünen içeriği burada yer alır -->
 <body>
-    <button class="lang-toggle" onclick="toggleLanguage()">
-        <span class="active">TR</span> / <span>EN</span>
-    </button>
-
     <!-- Google Translate Element -->
     <div id="google_translate_element"></div>
 
     <!-- Translation Prompt -->
-    <div class="translate-prompt" id="translatePrompt">
-        <p>Would you like to view this page in your native language?</p>
-        <div class="buttons">
-            <button class="accept" onclick="acceptTranslation()">Yes, please</button>
-            <button class="decline" onclick="hideTranslatePrompt()">No, thanks</button>
-        </div>
-    </div>
+    <div class="translate-prompt" id="translatePrompt"></div>
 
     <!-- Yüz animasyonu için ana kapsayıcı div -->
     <div class="face-container">
@@ -153,69 +116,21 @@
 
     <div class="buton-wrapper">
         <button class="mini-buton2" onclick="window.location.href='ozelliklerim.html'">💫</button>
-        <button id="button1" onclick="toggleMiniButtons()" data-tr="Beni tanı" data-en="Get to know me">Beni tanı</button>
+        <button id="button1" onclick="toggleMiniButtons()">Beni tanı</button>
         <button class="mini-buton1" onclick="window.location.href='cv.html'">🫶</button>
     </div>
     <div class="buton2-wrapper">
         <button class="mini-buton2-top" onclick="window.location.href='utangac.html'">💫</button>
-        <button id="button2" data-tr="yaptıklarım" data-en="my works">yaptıklarım</button>
+        <button id="button2">yaptıklarım</button>
         <button class="mini-buton2-right" onclick="window.location.href='sadhamster.html'">🫶</button>
     </div>
     <!-- İletişim sayfasına yönlendiren buton -->
-    <button id="button3" data-tr="maille beni" data-en="mail me">maille beni</button>
+    <button id="button3">maille beni</button>
 
-    <!-- JavaScript dosyası bağlantısı - defer ile sayfa yüklendikten sonra çalışır -->
     <script>
         function toggleMiniButtons() {
             document.querySelector('.buton-wrapper').classList.toggle('show-mini-buttons');
         }
-
-        // Language toggle functionality
-        let currentLang = localStorage.getItem('preferredLanguage') || 'tr';
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'tr' ? 'en' : 'tr';
-            localStorage.setItem('preferredLanguage', currentLang);
-            updatePageLanguage();
-            
-            // Update the active language indicator
-            const trSpan = document.querySelector('.lang-toggle span:first-child');
-            const enSpan = document.querySelector('.lang-toggle span:last-child');
-            if (currentLang === 'tr') {
-                trSpan.classList.add('active');
-                enSpan.classList.remove('active');
-            } else {
-                trSpan.classList.remove('active');
-                enSpan.classList.add('active');
-            }
-        }
-
-        function updatePageLanguage() {
-            // Update all elements with data-tr and data-en attributes
-            document.querySelectorAll('[data-tr][data-en]').forEach(element => {
-                element.textContent = element.getAttribute(`data-${currentLang}`);
-            });
-
-            // Update HTML lang attribute
-            document.documentElement.lang = currentLang;
-
-            // Update page title
-            document.title = currentLang === 'tr' ? 'Fareyi Takip Eden Gözler' : 'Eyes Following Mouse';
-            
-            // Update the active language indicator on page load
-            const trSpan = document.querySelector('.lang-toggle span:first-child');
-            const enSpan = document.querySelector('.lang-toggle span:last-child');
-            if (currentLang === 'tr') {
-                trSpan.classList.add('active');
-                enSpan.classList.remove('active');
-            } else {
-                trSpan.classList.remove('active');
-                enSpan.classList.add('active');
-            }
-        }
-
-        // Initialize language on page load
-        document.addEventListener('DOMContentLoaded', updatePageLanguage);
 
         // Check if we've already shown the prompt
         const hasShownPrompt = localStorage.getItem('hasShownTranslatePrompt');
@@ -227,15 +142,25 @@
                 
                 // If user is not from Turkey and hasn't seen the prompt
                 if (data.country_code !== 'TR' && !hasShownPrompt) {
-                    showTranslatePrompt();
+                    // Get country name and language
+                    const countryName = data.country_name;
+                    showTranslatePrompt(countryName);
                 }
             } catch (error) {
                 console.error('Error detecting country:', error);
             }
         }
 
-        function showTranslatePrompt() {
-            document.getElementById('translatePrompt').style.display = 'block';
+        function showTranslatePrompt(countryName) {
+            const promptElement = document.getElementById('translatePrompt');
+            promptElement.innerHTML = `
+                <p>Oh, you're from ${countryName}! Would you like to translate this page for you?</p>
+                <div class="buttons">
+                    <button class="accept" onclick="acceptTranslation()">Yes, please</button>
+                    <button class="decline" onclick="hideTranslatePrompt()">No, thanks</button>
+                </div>
+            `;
+            promptElement.style.display = 'block';
         }
 
         function hideTranslatePrompt() {
@@ -250,16 +175,30 @@
             // Show Google Translate
             document.getElementById('google_translate_element').style.display = 'block';
             
-            // Load Google Translate script if not already loaded
-            if (!window.google?.translate) {
+            // Load Google Translate script
+            const script = document.createElement('script');
+            script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            document.body.appendChild(script);
+            
+            // Save preference
+            localStorage.setItem('autoTranslate', 'true');
+        }
+
+        // Check for auto-translate preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('autoTranslate') === 'true') {
+                // Show Google Translate
+                document.getElementById('google_translate_element').style.display = 'block';
+                
+                // Load Google Translate script
                 const script = document.createElement('script');
                 script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
                 document.body.appendChild(script);
+            } else {
+                // Check country only if we haven't auto-translated
+                detectCountry();
             }
-        }
-
-        // Check country when page loads
-        document.addEventListener('DOMContentLoaded', detectCountry);
+        });
     </script>
 </body>
 
